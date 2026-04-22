@@ -1,0 +1,39 @@
+{
+    "_comment": "Tone II - Sarum psalm tone data. Source: St. Dunstan's Plainsong Psalter / psalmodia GABC. Verified: 2026-02-15",
+    "id": "tone-2",
+    "mode": 2,
+    "name": "Tone II",
+    "variants": [
+        {
+            "id": "tone-2-1",
+            "label": "1",
+            "isDefault": true,
+            "intonation": [
+                { "note": "C", "octave": 3 },
+                { "note": "D", "octave": 3 },
+                { "note": "F", "octave": 3 }
+            ],
+            "recitingTone": { "note": "F", "octave": 3 },
+            "mediation": {
+                "cadence": [
+                    { "notes": [{ "note": "G", "octave": 3 }], "role": "accent" },
+                    { "notes": [{ "note": "F", "octave": 3 }], "role": "post-accent" }
+                ]
+            },
+            "differentiae": [
+                {
+                    "id": "1",
+                    "label": "1",
+                    "termination": {
+                        "cadence": [
+                            { "notes": [{ "note": "E", "octave": 3 }], "role": "preparation" },
+                            { "notes": [{ "note": "C", "octave": 3 }], "role": "accent" },
+                            { "notes": [{ "note": "C", "octave": 3 }], "role": "post-accent" },
+                            { "notes": [{ "note": "D", "octave": 3 }], "role": "post-accent" }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}
