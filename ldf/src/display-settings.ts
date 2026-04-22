@@ -17,5 +17,8 @@ export class DisplaySettings {
     public psalmPause: number = 1000,
     public hideRubrics: boolean = false,
     public audioRecordings: boolean = false,
+    public chantNotation: 'off' | 'collapsed' | 'always' | 'tablet-only' = 'off',
+    public chantTradition: 'sarum' | 'roman' | 'pmms' | 'st-dunstan' | 'none' = 'none',
+    public psalmsBold: 'none' | 'alternate' | 'all' = 'none',
   ) {}
 }

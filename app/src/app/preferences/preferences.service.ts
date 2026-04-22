@@ -400,6 +400,9 @@ export class PreferencesService {
         this.grabPreference("darkmode"),
         this.grabPreference("bolded"),
         this.grabPreference("psalmPause"),
+        this.grabPreference("chantNotation"),
+        this.grabPreference("chantTradition"),
+        this.grabPreference("psalmsBold"),
       ]).pipe(
         map((settings) => new DisplaySettings(...settings)),
         shareReplay()
