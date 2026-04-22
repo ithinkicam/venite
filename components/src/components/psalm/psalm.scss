@@ -176,3 +176,18 @@ h3.editable-label {
 .section-break.hidden {
   display: none;
 }
+
+/* Decorated drop-cap on the first verse of the first psalm-set
+ * Gated by DisplaySettings.dropcaps === 'decorated' (reflected as
+ * a host attribute by the integration wiring in a later wave).
+ * Pattern: singtheoffice.com — float a large serif initial on verse 1. */
+:host([dropcaps="decorated"]) .psalm-set:first-of-type .psalm:first-of-type .verse::first-letter,
+:host([dropcaps="decorated"]) .psalm-set:first-of-type .psalm:first-of-type .verse:first-of-type::first-letter {
+  float: left;
+  font-size: 3em;
+  line-height: 0.9;
+  padding-right: 0.1em;
+  margin-top: 0.05em;
+  font-family: var(--ldf-dropcap-font, serif);
+  font-weight: normal;
+}
