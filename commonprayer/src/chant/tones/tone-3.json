@@ -1,0 +1,102 @@
+{
+    "_comment": "Melodic formulas from the Sarum chant tradition (public domain, medieval). St Dunstan's Plainsong Psalter (Andrewes Press 2002) served only as a verification reference — no typography, pointings, or editorial choices from that copyrighted work have been reproduced. Cherry-picked from orphan /chant/dist/ (2026-02-15) and adapted to ldf/chant ToneFile schema 2026-04-22.",
+    "id": "tone-3",
+    "mode": 3,
+    "name": "Tone III",
+    "variants": [
+        {
+            "id": "tone-3-a",
+            "label": "A",
+            "isDefault": true,
+            "mediationVariant": "standard",
+            "intonation": [
+                { "note": "E", "octave": 3 },
+                { "note": "F", "octave": 3 },
+                { "note": "A", "octave": 3 }
+            ],
+            "recitingTone": { "note": "A", "octave": 3 },
+            "mediation": {
+                "cadence": [
+                    { "notes": [{ "note": "B", "octave": 3 }], "role": "preparation" },
+                    { "notes": [{ "note": "A", "octave": 3 }, { "note": "G", "octave": 3 }], "role": "accent" },
+                    { "notes": [{ "note": "A", "octave": 3 }], "role": "post-accent" }
+                ]
+            },
+            "differentiae": [
+                {
+                    "id": "1",
+                    "label": "1",
+                    "termination": {
+                        "cadence": [
+                            { "notes": [{ "note": "A", "octave": 3 }, { "note": "G", "octave": 3 }], "role": "preparation" },
+                            { "notes": [{ "note": "F", "octave": 3 }, { "note": "G", "octave": 3 }], "role": "accent" },
+                            { "notes": [{ "note": "F", "octave": 3 }], "role": "post-accent" },
+                            { "notes": [{ "note": "E", "octave": 3 }], "role": "post-accent" },
+                            { "notes": [{ "note": "E", "octave": 3 }, { "note": "F", "octave": 3 }], "role": "post-accent" }
+                        ]
+                    }
+                },
+                {
+                    "id": "2",
+                    "label": "2",
+                    "termination": {
+                        "cadence": [
+                            { "notes": [{ "note": "A", "octave": 3 }, { "note": "G", "octave": 3 }], "role": "preparation" },
+                            { "notes": [{ "note": "F", "octave": 3 }, { "note": "G", "octave": 3 }], "role": "accent" },
+                            { "notes": [{ "note": "F", "octave": 3 }], "role": "post-accent" },
+                            { "notes": [{ "note": "E", "octave": 3 }], "role": "post-accent" }
+                        ]
+                    }
+                },
+                {
+                    "id": "3",
+                    "label": "3",
+                    "termination": {
+                        "cadence": [
+                            { "notes": [{ "note": "A", "octave": 3 }, { "note": "G", "octave": 3 }], "role": "preparation" },
+                            { "notes": [{ "note": "F", "octave": 3 }, { "note": "G", "octave": 3 }, { "note": "F", "octave": 3 }], "role": "accent" },
+                            { "notes": [{ "note": "E", "octave": 3 }, { "note": "D", "octave": 3 }], "role": "post-accent" },
+                            { "notes": [{ "note": "C", "octave": 3 }], "role": "post-accent" }
+                        ]
+                    }
+                },
+                {
+                    "id": "4",
+                    "label": "4",
+                    "termination": {
+                        "cadence": [
+                            { "notes": [{ "note": "F", "octave": 3 }], "role": "preparation" },
+                            { "notes": [{ "note": "A", "octave": 3 }], "role": "accent" },
+                            { "notes": [{ "note": "G", "octave": 3 }], "role": "post-accent" }
+                        ]
+                    }
+                },
+                {
+                    "id": "5",
+                    "label": "5",
+                    "termination": {
+                        "cadence": [
+                            { "notes": [{ "note": "F", "octave": 3 }], "role": "preparation" },
+                            { "notes": [{ "note": "A", "octave": 3 }], "role": "accent" },
+                            { "notes": [{ "note": "A", "octave": 3 }], "role": "post-accent" },
+                            { "notes": [{ "note": "G", "octave": 3 }, { "note": "F", "octave": 3 }], "role": "post-accent" }
+                        ]
+                    }
+                },
+                {
+                    "id": "6",
+                    "label": "6",
+                    "termination": {
+                        "cadence": [
+                            { "notes": [{ "note": "F", "octave": 3 }], "role": "preparation" },
+                            { "notes": [{ "note": "A", "octave": 3 }], "role": "accent" },
+                            { "notes": [{ "note": "G", "octave": 3 }], "role": "post-accent" },
+                            { "notes": [{ "note": "F", "octave": 3 }], "role": "post-accent" },
+                            { "notes": [{ "note": "E", "octave": 3 }], "role": "post-accent" }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}
