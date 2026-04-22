@@ -1,6 +1,6 @@
 import { modalController } from '@ionic/core';
 import { Component, Element, Prop, Event, Watch, State, JSX, h, Host, EventEmitter } from '@stencil/core';
-import { Psalm, PsalmSection, PsalmVerse, Refrain, Heading, dateFromYMDString, LiturgicalDocument, Change } from '@venite/ldf';
+import { Psalm, PsalmSection, PsalmVerse, Refrain, Heading, dateFromYMDString, LiturgicalDocument, Change, DisplaySettings, VersePointing } from '@venite/ldf';
 import { getComponentClosestLanguage } from '../../utils/locale';
 
 import EN from './psalm.i18n.en.json';
@@ -50,6 +50,11 @@ export class PsalmComponent {
   /** Whether the object is editable */
   @Prop() editable : boolean;
 
+  /** User display preferences. When `chantNotation !== 'off'` and the
+   *  psalm has `metadata.pointing.verses[<number>]`, the verse text is
+   *  rendered via `<ldf-chant-pointing>` instead of `<ldf-string>`. */
+  @Prop() displaySettings : DisplaySettings;
+
   // Events
   @Event({ bubbles: true }) ldfAskForCanticleOptions : EventEmitter<string>;
 
@@ -97,6 +102,50 @@ export class PsalmComponent {
 
   async filter() {
     this.filteredValue = this.obj.filteredVerses();
+  }
+
+  /**
+   * Look up pointing metadata for a given verse number. Returns `undefined`
+   * if pointing is not present or chant rendering is disabled.
+   */
+  pointingFor(verseNumber: string | undefined) : VersePointing | undefined {
+    if (!verseNumber) return undefined;
+    if (this.displaySettings?.chantNotation === 'off') return undefined;
+    return this.obj?.metadata?.pointing?.verses?.[verseNumber];
+  }
+
+  /**
+   * Render the (half-)verse text. When pointing data exists for the verse
+   * and `chantNotation !== 'off'`, emit `<ldf-chant-pointing>`; otherwise
+   * fall back to the existing `<ldf-string>` path (unchanged behavior).
+   */
+  renderVerseText(
+    text: string,
+    verse: PsalmVerse,
+    verseRenderIndex: number,
+    isHalfVerse: boolean,
+  ) : JSX.Element {
+    const pointing = this.pointingFor(verse?.number);
+    if (pointing) {
+      return (
+        <ldf-chant-pointing
+          text={text}
+          pointing={JSON.stringify(pointing)}
+          psalmsBold={this.displaySettings?.psalmsBold ?? 'none'}
+          verseIndex={verseRenderIndex}
+          ariaLabel={text}
+        ></ldf-chant-pointing>
+      );
+    }
+    return (
+      <ldf-string text={text}
+        citation={{label: this.obj?.label, book: this.obj?.style === 'psalm' ? 'Psalm' : undefined, chapter: this.obj?.metadata?.number, verse: verse.number}}
+        dropcap={isHalfVerse ? 'disabled' : useDropcap(this.obj?.language, this.obj?.display_format, verseRenderIndex)}
+        index={isHalfVerse ? undefined : verseRenderIndex}
+        fragment={this.path}
+      >
+      </ldf-string>
+    );
   }
 
   // Render helpers
@@ -262,6 +311,18 @@ export class PsalmComponent {
       .flat()
       .reduce((a, b) => a || b, false);
 
+    // Precompute per-section offsets so we can compute a stable
+    // psalm-wide verse index for `<ldf-chant-pointing verseIndex=...>`.
+    // This drives the `'alternate'` bolding mode.
+    const sectionOffsets : number[] = [];
+    {
+      let offset = 0;
+      (this.filteredValue || []).forEach(section => {
+        sectionOffsets.push(offset);
+        offset += (section?.value?.length || 0);
+      });
+    }
+
     const localeStrings = this.localeStrings || {};
 
     return (
@@ -305,6 +366,10 @@ export class PsalmComponent {
               // otherwise, it's a normal psalm verse
               const nodes : JSX.Element[] = new Array();
 
+              // psalm-wide verse index (across sections). Used for
+              // alternate-verse bolding and as a dropcap/index hint.
+              const verseRenderIndex = (sectionOffsets[sectionIndex] || 0) + verseIndex;
+
               // 1st half of verse
               nodes.push(
                 <div class='verse'>
@@ -317,13 +382,7 @@ export class PsalmComponent {
                     template={pattern}
                     templateMaker={templateMaker}>
                   </ldf-editable-text> :
-                  <ldf-string text={verse.verse}
-                    citation={{label: this.obj?.label, book: this.obj?.style === 'psalm' ? 'Psalm' : undefined, chapter: this.obj?.metadata?.number, verse: verse.number}}
-                    dropcap={useDropcap(this.obj?.language, this.obj?.display_format, verseIndex)}
-                    index={verseIndex}
-                    fragment={this.path}
-                  >
-                  </ldf-string>}
+                  this.renderVerseText(verse.verse, verse, verseRenderIndex, false)}
                 </div>
               );
 
@@ -340,12 +399,7 @@ export class PsalmComponent {
                     placeholder='consectetur adipiscing elit.'
                     template={pattern}>
                   </ldf-editable-text> :
-                  <ldf-string text={verse.halfverse}
-                    citation={{label: this.obj?.label, book: this.obj?.style === 'psalm' ? 'Psalm' : undefined, chapter: this.obj?.metadata?.number, verse: verse.number}}
-                    dropcap='disabled'
-                    fragment={this.path}
-                  >
-                  </ldf-string>}
+                  this.renderVerseText(verse.halfverse, verse, verseRenderIndex, true)}
                 </div>
               );
 
