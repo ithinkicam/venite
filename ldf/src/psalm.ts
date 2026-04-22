@@ -1,6 +1,8 @@
 import { LiturgicalDocument } from './liturgical-document';
 import { Heading } from './heading';
 import { Refrain } from './refrain';
+import { ChantData } from './chant/chant-data';
+import { PsalmPointing } from './chant/pointing';
 
 const STYLES = ['psalm', 'canticle', 'invitatory'] as const;
 type StyleTuple = typeof STYLES;
@@ -23,6 +25,12 @@ export class Psalm extends LiturgicalDocument {
 
     /** Whether it should be possible to swap this for another psalm/canticle in the UI */
     changeable?: boolean | undefined;
+
+    /** Chant metadata — which tone (and/or GABC) should be used to sing this psalm. */
+    chant?: ChantData;
+
+    /** Per-verse pointing marks for chant rendering. */
+    pointing?: PsalmPointing;
   };
   value: PsalmSection[];
 

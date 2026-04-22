@@ -1,4 +1,5 @@
 import { LiturgicalDocument } from './liturgical-document';
+import { ChantData } from './chant/chant-data';
 
 const STYLES = ['normal', 'antiphon', 'gloria'] as const;
 type StyleTuple = typeof STYLES;
@@ -9,6 +10,7 @@ export class Refrain extends LiturgicalDocument {
   style: StyleTuple[number];
   metadata: {
     align?: 'left' | 'right' | 'center';
+    chant?: ChantData;
   };
   value: string[];
 

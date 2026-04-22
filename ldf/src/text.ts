@@ -1,4 +1,5 @@
 import { LiturgicalDocument } from './liturgical-document';
+import { ChantData } from './chant/chant-data';
 
 const STYLES = ['text', 'prayer', 'markdown', 'authorized-prayers'] as const;
 type StyleTuple = typeof STYLES;
@@ -13,6 +14,7 @@ export class Text extends LiturgicalDocument {
     omit_response: boolean;
     omit_label: boolean;
     rollup: boolean;
+    chant?: ChantData;
   };
 
   /** Returns the list of all possible `style` values. */
