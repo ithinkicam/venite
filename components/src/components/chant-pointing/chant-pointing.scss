@@ -1,0 +1,29 @@
+:host {
+  display: inline;
+  font-family: inherit;
+}
+
+// Bold overlay toggles on when psalmsBold resolves to true. The host class
+// is driven by the component; .accent spans inherit normal weight by default
+// so "none" mode still shows caesura and flex without any bold chrome.
+:host(.bold) {
+  .accent {
+    font-weight: bold;
+  }
+}
+
+.accent-mediant,
+.accent-final {
+  // baseline: no visible effect unless :host(.bold) applies weight.
+}
+
+.caesura {
+  margin: 0 0.25em;
+  font-weight: normal;
+}
+
+.flex-mark {
+  margin: 0 0.15em;
+  font-weight: normal;
+  color: inherit;
+}
