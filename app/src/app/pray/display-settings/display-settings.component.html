@@ -136,6 +136,14 @@
       <ion-checkbox [value]="settings.psalmVerses" [checked]="settings.psalmVerses" (ionChange)="updateSetting(uid, 'psalmVerses', $event)" slot="start"></ion-checkbox>
     </ion-item>
     <ion-item>
+      <ion-label position="stacked">{{ 'displaySettings.psalmsBold.label' | translate }}</ion-label>
+      <ion-select [value]="settings.psalmsBold" (ionChange)="updateSetting(uid, 'psalmsBold', $event)">
+        <ion-select-option value="none">{{ 'displaySettings.psalmsBold.none' | translate }}</ion-select-option>
+        <ion-select-option value="alternate">{{ 'displaySettings.psalmsBold.alternate' | translate }}</ion-select-option>
+        <ion-select-option value="all">{{ 'displaySettings.psalmsBold.all' | translate }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
       <ion-label>{{ 'displaySettings.Reading-Verses' | translate }}</ion-label>
       <ion-checkbox [value]="settings.bibleVerses" [checked]="settings.bibleVerses" (ionChange)="updateSetting(uid, 'bibleVerses', $event)" slot="start"></ion-checkbox>
     </ion-item>
