@@ -48,3 +48,5 @@ export * from './editing/cursor-message';
 export * from './editing/user';
 
 export * from './utils';
+
+export * from './chant';

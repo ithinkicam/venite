@@ -1,4 +1,5 @@
 import { LiturgicalDocument } from './liturgical-document';
+import { ChantData } from './chant/chant-data';
 
 const STYLES = ['preces', 'litany', 'responsive'] as const;
 type StyleTuple = typeof STYLES;
@@ -10,6 +11,7 @@ export class ResponsivePrayer extends LiturgicalDocument {
   value: ResponsivePrayerLine[];
   metadata?: {
     response: string;
+    chant?: ChantData;
   };
 
   /** Returns the list of all possible `style` values. */
