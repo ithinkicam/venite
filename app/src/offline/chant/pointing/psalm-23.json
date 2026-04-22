@@ -1,0 +1,37 @@
+{
+  "psalm": "23",
+  "source": "venite-editorial",
+  "_comment": "BCP 1979 Ps 23 pointed by Venite editors using structural conventions only (dot for cadence start, asterisk caesura, ~8% dactylic exceptions, intonation on v1 only). These are our own editorial choices; no specific pointings from any copyrighted psalter were reproduced. Word indices are from the END of each half-verse, 0-based (0 = last word). Ambiguity notes: v4 final cadence 'comfort me' treated as dactylic (COM-fort-me, finalAccent on 'comfort'); v5 mediant 'trouble me' treated as dactylic on the mediant cadence (the schema's `ending` field only captures the final cadence, so the v5 mediant-dactylic character is left for the renderer/tone to handle via abrupt-mediation rules); v6 first half cadence falls naturally on 'life' (monosyllabic).",
+  "verses": {
+    "1": {
+      "mediantAccent": 0,
+      "finalAccent": 0,
+      "intonationWords": 2
+    },
+    "2": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    },
+    "3": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    },
+    "4": {
+      "mediantAccent": 0,
+      "finalAccent": 1,
+      "flex": {
+        "wordFromEnd": 5,
+        "inflected": true
+      },
+      "ending": "dactylic"
+    },
+    "5": {
+      "mediantAccent": 1,
+      "finalAccent": 0
+    },
+    "6": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    }
+  }
+}
