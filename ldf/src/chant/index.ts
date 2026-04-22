@@ -8,3 +8,4 @@ export * from './chant-data';
 export * from './pointing';
 export * from './psalm-tone-assignment';
 export * from './format-tone-id';
+export * from './generate-gabc';
