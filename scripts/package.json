@@ -1,0 +1,11 @@
+{
+  "name": "venite-scripts",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Build-time scripts for the venite monorepo (chant offline sync, etc.).",
+  "scripts": {
+    "sync-chant": "node sync-chant-offline.js",
+    "test": "node sync-chant-offline.test.js"
+  }
+}
