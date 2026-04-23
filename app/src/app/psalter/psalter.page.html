@@ -56,7 +56,7 @@
   <div [ngClass]="processSettings(settings$ | async)">
     <ng-container *ngIf="psalm$ | async as psalm">
       <div [@swiping]="isSwiping" class="psalm">
-        <ldf-liturgical-document [doc]="psalm"></ldf-liturgical-document>
+        <ldf-liturgical-document [doc]="psalm" [displaySettings]="settings$ | async"></ldf-liturgical-document>
       </div>
     </ng-container>
   </div>
