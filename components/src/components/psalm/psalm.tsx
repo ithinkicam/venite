@@ -11,6 +11,75 @@ const LOCALE = {
   'es': ES
 };
 
+/**
+ * Render-time pointing lookup table.
+ *
+ * Keyed by psalm number (string). Each entry exposes a `verses` map keyed by
+ * verse number (string) yielding a `VersePointing`. This mirrors the inline
+ * `metadata.pointing` shape on `Psalm` docs so `pointingFor()` can read from
+ * either source uniformly.
+ */
+type PointingTable = Record<string, { verses: Record<string, VersePointing> }>;
+
+/**
+ * Module-level cache of the pointing table. Shared across all `<ldf-psalm>`
+ * instances on the page so the JSON fetch happens at most once per page load
+ * (and at most once per psalter, once Phase 2 threads the preference through).
+ */
+let pointingTablePromise: Promise<PointingTable> | null = null;
+
+/**
+ * Normalize a raw `psalms` map from the offline JSON into `PointingTable`
+ * shape. Accepts both the declared shape (`psalms[n] = { verses: {...} }`)
+ * and the flattened shape currently on disk (`psalms[n] = { "1": {...} }`),
+ * so the loader stays tolerant while the fixture layout evolves.
+ */
+function normalizePointingTable(psalms: Record<string, any> | undefined | null): PointingTable {
+  const table: PointingTable = {};
+  if (!psalms || typeof psalms !== 'object') return table;
+  for (const [psalmNumber, raw] of Object.entries(psalms)) {
+    if (!raw || typeof raw !== 'object') continue;
+    if (raw.verses && typeof raw.verses === 'object') {
+      table[psalmNumber] = { verses: raw.verses as Record<string, VersePointing> };
+    } else {
+      // Flat shape: the entry itself is the verse-number → VersePointing map.
+      table[psalmNumber] = { verses: raw as Record<string, VersePointing> };
+    }
+  }
+  return table;
+}
+
+/**
+ * Load the offline pointing table for the given psalter. Results are cached
+ * at module level. On any fetch failure (404, network, parse error) the
+ * loader resolves to an empty table so callers fall through to the plain
+ * `<ldf-string>` render path — no thrown exceptions, no broken state.
+ */
+function loadPointingTable(psalter: string = 'bcp1979'): Promise<PointingTable> {
+  if (pointingTablePromise) return pointingTablePromise;
+  pointingTablePromise = fetch(`/offline/chant/pointing/psalms-${psalter}.json`)
+    .then(res => {
+      if (!res.ok) throw new Error(`Pointing table ${psalter} fetch failed: ${res.status}`);
+      return res.json();
+    })
+    .then(data => normalizePointingTable(data && data.psalms))
+    .catch(err => {
+      console.warn('[ldf-psalm] Could not load chant pointing table:', err && err.message);
+      return {} as PointingTable; // fail open: no pointing data, fall through to plain text
+    });
+  return pointingTablePromise;
+}
+
+/**
+ * Reset the module-level cache. Used by unit tests; not called by production
+ * code paths.
+ */
+function __resetPointingTableCacheForTests() {
+  pointingTablePromise = null;
+}
+// Silence TS "declared but never read" — kept for future test wiring.
+void __resetPointingTableCacheForTests;
+
 @Component({
   tag: 'ldf-psalm',
   styleUrl: 'psalm.scss',
@@ -25,6 +94,10 @@ export class PsalmComponent {
   @State() filteredValue : PsalmSection[];
   @State() focusedVerse : number | undefined = undefined;
   @State() focusedSection : number | undefined = undefined;
+  /** Render-time pointing lookup keyed by psalm number. Populated by
+   *  `loadPointingTable()` in `componentWillLoad`. Empty object when the
+   *  fetch fails (fail-open, renders plain text). */
+  @State() pointingTable?: PointingTable;
 
   // Properties
   /** The LDF Psalm to be rendered, either as JSON or an Object */
@@ -65,6 +138,13 @@ export class PsalmComponent {
     this.docChanged(this.doc);
     this.loadLocaleStrings();
     this.filter();
+    // Load the offline chant-pointing table. Fetches once per page (cached
+    // at module level). If the fetch fails we still render; `pointingTable`
+    // ends up as `{}` and `pointingFor()` falls through to plain-text.
+    // NB: Phase 1 hardcodes psalter='bcp1979'; Phase 2 will thread the
+    // psalter-version preference through.
+    const table = await loadPointingTable();
+    this.pointingTable = table;
   }
 
   // Private methods
@@ -107,11 +187,27 @@ export class PsalmComponent {
   /**
    * Look up pointing metadata for a given verse number. Returns `undefined`
    * if pointing is not present or chant rendering is disabled.
+   *
+   * Priority order:
+   *   1. Inline override on the doc itself (`obj.metadata.pointing.verses`)
+   *   2. Lookup by psalm number in the module-loaded `pointingTable`
+   *
+   * Keeping inline as the higher priority means editorial overrides on a
+   * specific doc still win over the generic aggregated table.
    */
   pointingFor(verseNumber: string | undefined) : VersePointing | undefined {
     if (!verseNumber) return undefined;
     if (this.displaySettings?.chantNotation === 'off') return undefined;
-    return this.obj?.metadata?.pointing?.verses?.[verseNumber];
+
+    // Priority 1: inline override on the doc itself.
+    const inline = this.obj?.metadata?.pointing?.verses?.[verseNumber];
+    if (inline) return inline;
+
+    // Priority 2: lookup by psalm number against the loaded table.
+    const psalmNumber = this.obj?.metadata?.number;
+    if (psalmNumber === undefined || psalmNumber === null) return undefined;
+    const key = String(psalmNumber);
+    return this.pointingTable?.[key]?.verses?.[verseNumber];
   }
 
   /**

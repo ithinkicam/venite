@@ -65,6 +65,36 @@ const PSALM_23_POINTED = {
   ]
 };
 
+// Same doc as PSALM_23_POINTED but without inline `metadata.pointing` — used
+// to exercise the render-time lookup path against the offline JSON.
+const PSALM_23_UNPOINTED = {
+  api: '',
+  slug: 'psalm_23_unpointed',
+  label: 'Psalm 23',
+  language: 'en',
+  version: 'bcp1979',
+  type: 'psalm' as 'psalm',
+  style: 'psalm' as 'psalm',
+  citation: 'Psalm 23',
+  metadata: {
+    number: 23
+  },
+  value: [
+    [
+      {
+        number: '1',
+        verse: 'The Lord is my shepherd; *',
+        halfverse: 'I shall not be in want.'
+      },
+      {
+        number: '2',
+        verse: 'He makes me lie down in green pastures *',
+        halfverse: 'and leads me beside still waters.'
+      }
+    ]
+  ]
+};
+
 describe('ldf-psalm', () => {
   it('renders', async () => {
     const page = await newE2EPage();
@@ -119,5 +149,82 @@ describe('ldf-psalm', () => {
 
     const pointing = await page.find('ldf-psalm ldf-chant-pointing');
     expect(pointing).toBeFalsy();
+  });
+
+  // --- Render-time pointing-table lookup (Phase 1 W5.pointing-lookup) -------
+  //
+  // These tests cover the module-level `loadPointingTable()` path. We intercept
+  // Puppeteer requests to the offline JSON endpoint and serve a test double,
+  // so we don't depend on app/src/offline layout or network state.
+
+  it('renders <ldf-chant-pointing> via the lookup table when inline pointing is absent', async () => {
+    const page = await newE2EPage();
+
+    // Serve a known pointing table for /offline/chant/pointing/psalms-bcp1979.json.
+    await page.setRequestInterception(true);
+    page.on('request', (req) => {
+      if (req.url().includes('/offline/chant/pointing/psalms-bcp1979.json')) {
+        req.respond({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify({
+            psalter: 'bcp1979',
+            psalms: {
+              '23': {
+                verses: {
+                  '1': { mediantAccent: 0, finalAccent: 0 },
+                  '2': { mediantAccent: 0, finalAccent: 0 }
+                }
+              }
+            }
+          })
+        });
+      } else {
+        req.continue();
+      }
+    });
+
+    const psalm = new Psalm(PSALM_23_UNPOINTED);
+    const displaySettings = { chantNotation: 'always', psalmsBold: 'none' };
+
+    await page.setContent(
+      `<ldf-psalm json='${JSON.stringify(psalm)}'></ldf-psalm>`
+    );
+    const el = await page.find('ldf-psalm');
+    await el.setProperty('displaySettings', displaySettings);
+    await page.waitForChanges();
+
+    const pointing = await page.find('ldf-psalm ldf-chant-pointing');
+    expect(pointing).toBeTruthy();
+  });
+
+  it('falls through to plain text when the pointing-table fetch fails (404)', async () => {
+    const page = await newE2EPage();
+
+    // 404 the offline JSON endpoint — component should render without crashing
+    // and without any <ldf-chant-pointing> nodes.
+    await page.setRequestInterception(true);
+    page.on('request', (req) => {
+      if (req.url().includes('/offline/chant/pointing/psalms-bcp1979.json')) {
+        req.respond({ status: 404, contentType: 'application/json', body: '{}' });
+      } else {
+        req.continue();
+      }
+    });
+
+    const psalm = new Psalm(PSALM_23_UNPOINTED);
+    const displaySettings = { chantNotation: 'always', psalmsBold: 'none' };
+
+    await page.setContent(
+      `<ldf-psalm json='${JSON.stringify(psalm)}'></ldf-psalm>`
+    );
+    const el = await page.find('ldf-psalm');
+    await el.setProperty('displaySettings', displaySettings);
+    await page.waitForChanges();
+
+    const pointing = await page.find('ldf-psalm ldf-chant-pointing');
+    expect(pointing).toBeFalsy();
+    // Component still hydrated — no broken state from the failed fetch.
+    expect(el).toHaveClass('hydrated');
   });
 });
