@@ -134,7 +134,20 @@
     "Voice": "Voice",
     "Response-and-Unison-Bolded": "Both",
     "Unison": "Unison",
-    "font-accessibility": "Scale font size based on device text size"
+    "font-accessibility": "Scale font size based on device text size",
+    "psalmsBold": {
+      "label": "Bolded psalm accents",
+      "none": "Off",
+      "alternate": "Alternate verses",
+      "all": "All accents"
+    },
+    "chantNotation": {
+      "label": "Chant notation",
+      "off": "Off",
+      "collapsed": "Collapsed",
+      "always": "Always on",
+      "tabletOnly": "Tablet only"
+    }
   },
   "editor": {
     "psalm_not_found": "We had trouble finding that psalm. Double-check the citation and try again.",

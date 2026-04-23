@@ -57,7 +57,7 @@
             <ng-container *ngIf="psalms$ | async as psalms else loading2">
               <details *ngFor="let psalm of psalms">
                 <summary>{{ psalm.label }}</summary>
-                <ldf-psalm [doc]="psalm"></ldf-psalm>
+                <ldf-psalm [doc]="psalm" [displaySettings]="settings"></ldf-psalm>
               </details>
             </ng-container>
             <h3>Lessons</h3>
@@ -71,18 +71,18 @@
           <h3>{{ "daily-readings.collects" | translate }}</h3>
           <details *ngFor="let collect of collects">
             <summary>{{ collect.label }}</summary>
-            <ldf-liturgical-document [doc]="collect.doc"></ldf-liturgical-document>
+            <ldf-liturgical-document [doc]="collect.doc" [displaySettings]="settings"></ldf-liturgical-document>
           </details>
         </ng-container>
           <ng-container *ngIf="canticles$ | async as canticles else loading2">
           <h3>{{ "daily-readings.canticles" | translate }}</h3>
           <details>
             <summary>{{ canticles.first.label || (canticles.first.value[0]?.label )}}</summary>
-            <ldf-liturgical-document [doc]="canticles.first"></ldf-liturgical-document>
+            <ldf-liturgical-document [doc]="canticles.first" [displaySettings]="settings"></ldf-liturgical-document>
           </details>
           <details>
             <summary>{{ canticles.second.label || (canticles.second.value[0]?.label )  }}</summary>
-            <ldf-liturgical-document [doc]="canticles.second"></ldf-liturgical-document>
+            <ldf-liturgical-document [doc]="canticles.second" [displaySettings]="settings"></ldf-liturgical-document>
           </details>
         </ng-container>
       </div>

@@ -66,6 +66,7 @@
                     [class]="{'icon-visible': !isBulletin}"
                     path="/"
                     [doc]="doc"
+                    [displaySettings]="settings"
                     [editable]="false"
                     (ldfDocShouldChange)="changeDoc(doc, $event)"
                     (ldfAskForCanticleOptions)="sendCanticleOptions($event, data[0], data[3])"

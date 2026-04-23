@@ -1,0 +1,61 @@
+{
+    "_comment": "Tone V - Sarum psalm tone data. Source: St. Dunstan's Plainsong Psalter / psalmodia GABC. Verified: 2026-02-15",
+    "id": "tone-5",
+    "mode": 5,
+    "name": "Tone V",
+    "variants": [
+        {
+            "id": "tone-5-1",
+            "label": "1",
+            "isDefault": true,
+            "intonation": [
+                { "note": "F", "octave": 3 },
+                { "note": "A", "octave": 3 },
+                { "note": "C", "octave": 4 }
+            ],
+            "recitingTone": { "note": "C", "octave": 4 },
+            "mediation": {
+                "cadence": [
+                    { "notes": [{ "note": "D", "octave": 4 }], "role": "accent" },
+                    { "notes": [{ "note": "C", "octave": 4 }], "role": "post-accent" }
+                ]
+            },
+            "differentiae": [
+                {
+                    "id": "1",
+                    "label": "1",
+                    "termination": {
+                        "cadence": [
+                            { "notes": [{ "note": "D", "octave": 4 }], "role": "preparation" },
+                            { "notes": [{ "note": "B", "octave": 3 }], "role": "accent" },
+                            { "notes": [{ "note": "B", "octave": 3 }], "role": "post-accent" }
+                        ]
+                    }
+                },
+                {
+                    "id": "2",
+                    "label": "2",
+                    "termination": {
+                        "cadence": [
+                            { "notes": [{ "note": "D", "octave": 4 }, { "note": "C", "octave": 4 }, { "note": "B", "octave": 3 }], "role": "preparation" },
+                            { "notes": [{ "note": "C", "octave": 4 }], "role": "accent" },
+                            { "notes": [{ "note": "A", "octave": 3 }, { "note": "C", "octave": 4 }], "role": "post-accent" }
+                        ]
+                    }
+                },
+                {
+                    "id": "3",
+                    "label": "3",
+                    "termination": {
+                        "cadence": [
+                            { "notes": [{ "note": "A", "octave": 3 }], "role": "preparation" },
+                            { "notes": [{ "note": "B", "octave": 3 }], "role": "accent" },
+                            { "notes": [{ "note": "G", "octave": 3 }], "role": "post-accent" },
+                            { "notes": [{ "note": "F", "octave": 3 }], "role": "post-accent" }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}

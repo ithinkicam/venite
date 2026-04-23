@@ -1,0 +1,53 @@
+{
+    "_comment": "Tonus Peregrinus - Sarum psalm tone data. Source: St. Dunstan's Plainsong Psalter. Verified: 2026-02-15. Clef: c4 (C4 at staff position j). Corrected from psalmodia GABC (which incorrectly used c3 clef). Special: two reciting tones. recitingTone = first half (A3). Second half reciting tone (A3) with B3 ornament is encoded as first neume group in termination cadence with role 'reciting'.",
+    "id": "tone-p",
+    "mode": 0,
+    "name": "Tonus Peregrinus",
+    "variants": [
+        {
+            "id": "tone-p-a",
+            "label": "A",
+            "isDefault": true,
+            "intonation": [
+                { "note": "B", "octave": 3 },
+                { "note": "A", "octave": 3 },
+                { "note": "B", "octave": 3 }
+            ],
+            "recitingTone": { "note": "A", "octave": 3 },
+            "mediation": {
+                "cadence": [
+                    { "notes": [{ "note": "B", "octave": 3 }], "role": "preparation" },
+                    { "notes": [{ "note": "A", "octave": 3 }], "role": "accent" },
+                    { "notes": [{ "note": "G", "octave": 3 }], "role": "post-accent" },
+                    { "notes": [{ "note": "F", "octave": 3 }], "role": "post-accent" }
+                ]
+            },
+            "differentiae": [
+                {
+                    "id": "1",
+                    "label": "1",
+                    "termination": {
+                        "cadence": [
+                            { "notes": [{ "note": "A", "octave": 3 }, { "note": "B", "octave": 3 }], "role": "reciting" },
+                            { "notes": [{ "note": "G", "octave": 3 }], "role": "preparation" },
+                            { "notes": [{ "note": "F", "octave": 3 }], "role": "accent" },
+                            { "notes": [{ "note": "E", "octave": 3 }, { "note": "D", "octave": 3 }], "role": "post-accent" }
+                        ]
+                    }
+                },
+                {
+                    "id": "2",
+                    "label": "2",
+                    "termination": {
+                        "cadence": [
+                            { "notes": [{ "note": "A", "octave": 3 }, { "note": "B", "octave": 3 }], "role": "reciting" },
+                            { "notes": [{ "note": "G", "octave": 3 }], "role": "preparation" },
+                            { "notes": [{ "note": "F", "octave": 3 }], "role": "accent" },
+                            { "notes": [{ "note": "E", "octave": 3 }, { "note": "D", "octave": 3 }], "role": "post-accent" }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}

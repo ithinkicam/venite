@@ -1,0 +1,109 @@
+{
+    "_comment": "Tone VI - Sarum psalm tone data. Source: St. Dunstan's Plainsong Psalter. Verified: 2026-02-15. Clef: c4 (C4 at staff position j). Corrected from psalmodia GABC (which incorrectly used f3/numeric-43 clef). Variants A/B/C differ in mediation; all share the same termination. Default is Variant A.",
+    "id": "tone-6",
+    "mode": 6,
+    "name": "Tone VI",
+    "variants": [
+        {
+            "id": "tone-6-a",
+            "label": "A",
+            "isDefault": true,
+            "intonation": [
+                { "note": "F", "octave": 3 },
+                { "note": "G", "octave": 3 },
+                { "note": "A", "octave": 3 }
+            ],
+            "recitingTone": { "note": "A", "octave": 3 },
+            "mediation": {
+                "cadence": [
+                    { "notes": [{ "note": "G", "octave": 3 }], "role": "accent" },
+                    { "notes": [{ "note": "A", "octave": 3 }], "role": "post-accent" }
+                ]
+            },
+            "differentiae": [
+                {
+                    "id": "1",
+                    "label": "1",
+                    "termination": {
+                        "cadence": [
+                            { "notes": [{ "note": "B", "octave": 3 }], "role": "preparation" },
+                            { "notes": [{ "note": "A", "octave": 3 }], "role": "accent" },
+                            { "notes": [{ "note": "G", "octave": 3 }], "role": "post-accent" },
+                            { "notes": [{ "note": "A", "octave": 3 }], "role": "post-accent" },
+                            { "notes": [{ "note": "F", "octave": 3 }], "role": "post-accent" }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": "tone-6-b",
+            "label": "B",
+            "isDefault": false,
+            "intonation": [
+                { "note": "F", "octave": 3 },
+                { "note": "G", "octave": 3 },
+                { "note": "A", "octave": 3 }
+            ],
+            "recitingTone": { "note": "A", "octave": 3 },
+            "mediation": {
+                "cadence": [
+                    { "notes": [{ "note": "B", "octave": 3 }], "role": "preparation" },
+                    { "notes": [{ "note": "A", "octave": 3 }], "role": "accent" },
+                    { "notes": [{ "note": "G", "octave": 3 }], "role": "post-accent" },
+                    { "notes": [{ "note": "A", "octave": 3 }], "role": "post-accent" }
+                ]
+            },
+            "differentiae": [
+                {
+                    "id": "1",
+                    "label": "1",
+                    "termination": {
+                        "cadence": [
+                            { "notes": [{ "note": "B", "octave": 3 }], "role": "preparation" },
+                            { "notes": [{ "note": "A", "octave": 3 }], "role": "accent" },
+                            { "notes": [{ "note": "G", "octave": 3 }], "role": "post-accent" },
+                            { "notes": [{ "note": "A", "octave": 3 }], "role": "post-accent" },
+                            { "notes": [{ "note": "F", "octave": 3 }], "role": "post-accent" }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": "tone-6-c",
+            "label": "C",
+            "isDefault": false,
+            "intonation": [
+                { "note": "F", "octave": 3 },
+                { "note": "G", "octave": 3 },
+                { "note": "A", "octave": 3 }
+            ],
+            "recitingTone": { "note": "A", "octave": 3 },
+            "mediation": {
+                "cadence": [
+                    { "notes": [{ "note": "C", "octave": 4 }], "role": "preparation" },
+                    { "notes": [{ "note": "B", "octave": 3 }], "role": "preparation" },
+                    { "notes": [{ "note": "A", "octave": 3 }], "role": "accent" },
+                    { "notes": [{ "note": "G", "octave": 3 }], "role": "post-accent" },
+                    { "notes": [{ "note": "A", "octave": 3 }], "role": "post-accent" }
+                ]
+            },
+            "differentiae": [
+                {
+                    "id": "1",
+                    "label": "1",
+                    "termination": {
+                        "cadence": [
+                            { "notes": [{ "note": "B", "octave": 3 }], "role": "preparation" },
+                            { "notes": [{ "note": "A", "octave": 3 }], "role": "accent" },
+                            { "notes": [{ "note": "G", "octave": 3 }], "role": "post-accent" },
+                            { "notes": [{ "note": "A", "octave": 3 }], "role": "post-accent" },
+                            { "notes": [{ "note": "F", "octave": 3 }], "role": "post-accent" }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}

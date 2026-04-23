@@ -10,6 +10,7 @@ import { SettingsPage } from "./settings.page";
 import { PrayPageModule } from "@venite/ng-pray";
 import { TranslateModule } from "@ngx-translate/core";
 import { SharedModule } from "../shared/shared.module";
+import { DisplaySettingsModule } from "../pray/display-settings/display-settings.module";
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { SharedModule } from "../shared/shared.module";
     PrayPageModule,
     TranslateModule,
     SharedModule,
+    DisplaySettingsModule,
   ],
   declarations: [SettingsPage],
 })

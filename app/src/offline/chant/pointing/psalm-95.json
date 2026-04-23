@@ -1,0 +1,61 @@
+{
+  "psalm": "95",
+  "source": "venite-editorial",
+  "_comment": "BCP 1979 Ps 95 pointed by Venite editors using structural conventions only (dot for cadence start, asterisk caesura, ~8% dactylic exceptions, intonation on v1 only). These are our own editorial choices; no specific pointings from any copyrighted psalter were reproduced. Word indices are from the END of each half-verse, 0-based (0 = last word). BCP 1979 Ps 95 is a single psalm-section of 11 verses; the 'Venite' portion in the BCP Daily Office is vv 1-7 but the psalm file is not split, so intonationWords is set on v1 only. Ambiguity notes: v2 final 'thanksgiving' treated as stressed on THANKS (standard liturgical pronunciation), so finalAccent=0 and non-dactylic; v4 final 'also' treated as the final stressed word carrying the cadence; v5 first 'made it' treated as trochaic (MADE-it, mediantAccent on 'made'); v7 is long and receives a flex at 'God' (per the natural caesura at the comma and the newline in the source text); v8 first cadence falls on 'wilderness' (WIL-der-ness, dactylic); v8 final 'tempted me' also dactylic (TEMPT-ed-me) — the schema's single `ending` field captures the verse-final cadence pattern only. Users may correct any of these via the /chant-pointing skill at Gate 2.",
+  "verses": {
+    "1": {
+      "mediantAccent": 0,
+      "finalAccent": 0,
+      "intonationWords": 2
+    },
+    "2": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    },
+    "3": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    },
+    "4": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    },
+    "5": {
+      "mediantAccent": 1,
+      "finalAccent": 0
+    },
+    "6": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    },
+    "7": {
+      "mediantAccent": 0,
+      "finalAccent": 0,
+      "flex": {
+        "wordFromEnd": 14,
+        "inflected": true
+      }
+    },
+    "8": {
+      "mediantAccent": 0,
+      "finalAccent": 1,
+      "flex": {
+        "wordFromEnd": 7,
+        "inflected": true
+      },
+      "ending": "dactylic"
+    },
+    "9": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    },
+    "10": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    },
+    "11": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    }
+  }
+}
