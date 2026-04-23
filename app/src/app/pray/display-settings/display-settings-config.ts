@@ -14,4 +14,5 @@ export class DisplaySettingsConfig {
   hide_rubrics?: undefined | boolean;
   audio_recordings?: undefined | boolean;
   psalmsBold?: undefined | boolean;
+  chantNotation?: undefined | boolean;
 }
