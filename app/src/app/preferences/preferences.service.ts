@@ -400,6 +400,8 @@ export class PreferencesService {
         this.grabPreference("darkmode"),
         this.grabPreference("bolded"),
         this.grabPreference("psalmPause"),
+        this.grabPreference("hideRubrics"),
+        this.grabPreference("audioRecordings"),
         this.grabPreference("chantNotation"),
         this.grabPreference("chantTradition"),
         this.grabPreference("psalmsBold"),
