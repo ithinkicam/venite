@@ -67,6 +67,7 @@
     "cordova-plugin-file": "^7.0.0",
     "cordova-plugin-file-opener2": "^4.0.0",
     "cordova-plugin-media": "^5.0.3",
+    "exsurge": "github:bbloomf/exsurge#23e6cccf4bd3c211a1ec6202cd36e95585f14c58",
     "firebase": "^8.3.1",
     "install": "^0.13.0",
     "json-pointer": "^0.6.0",
