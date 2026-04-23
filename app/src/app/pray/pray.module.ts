@@ -20,7 +20,7 @@ import { FavoriteTextComponent } from "./favorite-text/favorite-text.component";
 import { SharedModule } from "../shared/shared.module";
 import { AudioService } from "./audio.service";
 import { Media } from "@ionic-native/media/ngx";
-import { DisplaySettingsComponent } from "./display-settings/display-settings.component";
+import { DisplaySettingsModule } from "./display-settings/display-settings.module";
 
 export class DisplaySettingsConfig {
   audio: boolean;
@@ -62,14 +62,10 @@ interface PrayRootConfig {
     PrayPageRoutingModule,
     EditorPageModule,
     SharedModule,
+    DisplaySettingsModule,
   ],
   exports: [MarkFavoriteComponent],
-  declarations: [
-    PrayPage,
-    MarkFavoriteComponent,
-    FavoriteTextComponent,
-    DisplaySettingsComponent,
-  ],
+  declarations: [PrayPage, MarkFavoriteComponent, FavoriteTextComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [AudioService, Media],
 })

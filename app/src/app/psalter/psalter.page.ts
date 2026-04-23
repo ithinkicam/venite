@@ -10,7 +10,7 @@ import { Observable, combineLatest, of } from "rxjs";
 import { DisplaySettings, Psalm } from "@venite/ldf";
 import { DocumentService } from "../services/document.service";
 import { tap, startWith, map, switchMap } from "rxjs/operators";
-import { DisplaySettingsComponent } from "@venite/ng-pray";
+import { DisplaySettingsComponent } from "../pray/display-settings/display-settings.component";
 import { ModalController } from "@ionic/angular";
 import { PREFERENCES_SERVICE } from "@venite/ng-service-api";
 import { PreferencesService } from "../preferences/preferences.service";

@@ -9,6 +9,7 @@ import { PsalterPageRoutingModule } from "./psalter-routing.module";
 import { PsalterPage } from "./psalter.page";
 import { TranslateModule } from "@ngx-translate/core";
 import { SharedModule } from "../shared/shared.module";
+import { DisplaySettingsModule } from "../pray/display-settings/display-settings.module";
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { SharedModule } from "../shared/shared.module";
     ReactiveFormsModule,
     TranslateModule,
     SharedModule,
+    DisplaySettingsModule,
   ],
   declarations: [PsalterPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
