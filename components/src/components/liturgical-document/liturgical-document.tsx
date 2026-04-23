@@ -1,5 +1,5 @@
 import { Component, Prop, Watch, State, Host, Listen, Event, EventEmitter, JSX, Element, h } from '@stencil/core';
-import { LiturgicalDocument, Liturgy, Meditation, BibleReading, Heading, Option, Psalm, Refrain, ResponsivePrayer, Rubric, Text, Image, LiturgicalColor, SelectableCitation, Responsive, Parallel } from '@venite/ldf';
+import { LiturgicalDocument, Liturgy, Meditation, BibleReading, Heading, Option, Psalm, Refrain, ResponsivePrayer, Rubric, Text, Image, LiturgicalColor, SelectableCitation, Responsive, Parallel, DisplaySettings } from '@venite/ldf';
 import { getComponentClosestLanguage } from '../../utils/locale';
 
 import EN from './liturgical-document.i18n.en.json';
@@ -69,6 +69,11 @@ export class LiturgicalDocumentComponent {
 
   /** CSS padding to add around element, if any. */
   @Prop() padding : string | undefined = undefined;
+
+  /** User display preferences forwarded to children that support them
+   *  (e.g. `<ldf-psalm>` uses `displaySettings.chantNotation` and
+   *  `displaySettings.psalmsBold` to drive chant-pointing rendering). */
+  @Prop() displaySettings : DisplaySettings;
 
   // Listeners
   @Listen("dragover", { passive: false })
@@ -232,7 +237,7 @@ export class LiturgicalDocumentComponent {
         node = <ldf-bible-reading path={this.path} editable={editable} doc={doc as BibleReading}></ldf-bible-reading>
         break;
       case 'psalm':
-        node = <ldf-psalm path={this.path} editable={editable} doc={doc as Psalm}></ldf-psalm>
+        node = <ldf-psalm path={this.path} editable={editable} doc={doc as Psalm} displaySettings={this.displaySettings}></ldf-psalm>
         break;
       default:
         console.warn('invalid type for document', doc);
