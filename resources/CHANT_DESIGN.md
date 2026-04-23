@@ -4,7 +4,7 @@ Adds plainchant support to Venite as an **aid for people learning to chant the D
 
 ## Encoding
 
-**GABC is the sole notation format.** ~14,000 CC0 chants in GregoBase. Exsurge.js renders GABC to SVG (~200KB, lazy-loaded). No MusicXML, no ABC, no MEI. One format, one renderer, one corpus.
+**GABC is the sole notation format.** ~19,000 CC0 chants in GregoBase (2024 dump); ~52 KB gzip for Exsurge. Exsurge.js renders GABC to SVG (lazy-loaded). No MusicXML, no ABC, no MEI. One format, one renderer, one corpus.
 
 ## Data model
 
@@ -21,43 +21,36 @@ interface ChantData {
 }
 ```
 
-**`PsalmTone`** — reference data (NOT an LDF doc type). Lives in tone library JSON:
-```typescript
-interface PsalmTone {
-  id: string;                    // "tone-1-a-4"
-  mode: number;
-  mediant: string;               // "A" | "B" | "C" | "S" | "default"
-  finalCadence?: string;         // "1"-"14", "York", "Gloucester", etc.
-  intonationGabc: string;        // GABC fragment
-  recitingNote: string;          // pitch letter
-  mediantCadenceGabc: string;    // GABC fragment
-  finalCadenceGabc: string;      // GABC fragment
-  label?: string;                // "Gloucester", "York", etc.
-  useFor?: string[];             // ['benedictus', 'magnificat'] for solemn forms
-  playback: {                    // for dynamic tone audition
-    intonation: Note[];
-    reciting: Note;
-    mediant: Note[];
-    final: Note[];
-  };
-}
-interface Note { pitch: string; duration?: number; }
-```
+**Tone data shape** — authoritative source: `ldf/src/chant/tone-file.ts` + sibling files (`tone-variant.ts`, `differentia.ts`, `mediation.ts`, `neume-group.ts`, `pitch.ts`). One JSON file per base tone (`tone-1.json` … `tone-8.json` + `tone-peregrinus.json`) contains a `ToneFile` whose `variants` array holds one `ToneVariant` per usable mediation variant (Tone I.A, I.B, etc.).
 
-ID format: `tone-1-a-4` (kebab-case). Display: `formatToneId("tone-1-a-4") => "I.A.4"`.
+Summary of the shape (see source for full field docs):
 
-Schema: **Mode.MediantCadence.FinalCadence** per St Dunstan's Table of Sarum Tones.
+- `ToneFile` → `{ id, mode: 1–8 | 'peregrinus', name, variants: ToneVariant[] }`
+- `ToneVariant` → `{ id, label, isDefault, intonation: Pitch[], recitingTone: Pitch, secondRecitingTone?, mediation, mediationVariant?: 'standard' | 'abrupt', differentiae: Differentia[], intonations?: { standard, solemn?, gospelCanticle? }, useFor?, recordings? }`
+- `Differentia` → `{ id, label, termination: { cadence: NeumeGroup[] } }` — mediation + termination are fixed pairs, not independent axes.
 
-**`PsalmPointing`** — on `Psalm.metadata.pointing`:
+Notable fields:
+
+- `secondRecitingTone` — supports Tonus Peregrinus (distinct reciting note in the second half-verse).
+- `mediationVariant: 'abrupt'` — medieval mediations that cadence onto the accent without standard preparation notes.
+- `intonations` — multiple intonation patterns (`standard` / `solemn` / `gospelCanticle`) per variant; Gospel canticles get their own solemn forms.
+- `recordings?` — Phase-2 slot for reference audio per variant; empty today, populated when Tone.js synthesis and/or linked canticasacra.org recordings land.
+
+ID format: kebab-case (`tone-1-a-4`). Display: `formatToneId("tone-1-a-4") => "I.A.4"`. Schema: **Mode.MediantCadence.FinalCadence** per St Dunstan's Table of Sarum Tones.
+
+**`PsalmPointing`** — on `Psalm.metadata.pointing`. Source: `ldf/src/chant/pointing.ts`.
 ```typescript
 interface PsalmPointing {
   verses: { [verseNumber: string]: VersePointing };
 }
 interface VersePointing {
-  mediantAccent?: number;    // word index from END of first half-verse
-  finalAccent?: number;      // word index from END of second half-verse
-  flexAccent?: number;       // word index from END (before mediation, for long verses)
-  ending?: 'dactylic';       // only when not trochaic (~8% of English verses)
+  mediantAccent?: number;        // syllable-from-end index on the mediation cadence
+  finalAccent?: number;          // syllable-from-end index on the termination cadence
+  caesura?: number;              // optional word-from-start index for a light break
+  flex?: { wordFromEnd: number; inflected: boolean }; // mid-verse flex for long single-line verses
+  preparatorySyllables?: number[];                    // syllables-from-end that take preparatory notes
+  intonationWords?: number;                           // words from the start carrying the intonation (v1)
+  ending?: 'dactylic';                                // exceptional non-trochaic cadence (~8%)
 }
 ```
 
@@ -113,11 +106,11 @@ chantTradition: 'sarum' | 'roman' | 'pmms' | 'st-dunstan' | 'none' = 'none';
 | 15 | Collect/lesson tones | Ferial + festal |
 | 16 | Hymn cycle | Compline hymns only; expand later |
 | 17 | Exsurge source | Most active fork; pin to SHA; adapter-wrapped for swap |
-| 18 | Font | Caeciliae (Exsurge default) |
+| 18 | Font | ExsurgeChar.otf (bundled with Exsurge). |
 | 19 | Mobile layout | `DisplaySettings.chantNotation` with device-class defaults |
 | 20 | Default state | Off; opt-in via settings |
 | 21 | TTS coexistence | Both coexist; mutual pause via MediaSessionService |
-| 22 | Audio | No recordings; all audition is dynamic synthesis from PsalmTone.playback |
+| 22 | Audio | Tone.js for audio synthesis (Phase 2); no recordings shipped, but `PsalmTone.recordings?` slot exists. |
 
 ## Rendering pipeline
 
@@ -188,7 +181,7 @@ All lazy-loaded. Users with chant off pay 0 KB.
 
 | Source | Content | License | Status |
 |---|---|---|---|
-| GregoBase (gregobase.selapa.net) | ~14,000 GABC chants | CC0 | Import pipeline needed |
+| GregoBase (gregobase.selapa.net) | ~19,000 GABC chants (2024 dump) | CC0 | Import pipeline needed |
 | St Dunstan's Plainsong Psalter | Tone table, collects, lessons, Marian antiphons, compline | PDF in `resources/` | Manual transcription needed |
 | The Plainsong Psalter (Litton) | Tone assignments for BCP 1979 | PDF in `resources/` | Reference only (copyright) |
 | User's Psalm Tone Table | Psalm-to-tone assignments (St Dunstan + Plainsong Psalter + custom) | User data | Screenshots captured in chat; to be formalized |
@@ -201,3 +194,32 @@ All lazy-loaded. Users with chant off pay 0 KB.
 | ldf/ | `src/chant/chant-data.ts`, `src/chant/psalm-tone.ts`, `src/chant/pointing.ts`, `src/chant/generate-gabc.ts`, `src/chant/format-tone-id.ts`, `src/chant/point-psalm.ts` (new); `src/psalm.ts`, `src/refrain.ts`, `src/text.ts`, `src/responsive-prayer.ts` (widen metadata); `src/display-settings.ts`; `src/index.ts` | 6 new, 6 edits |
 | commonprayer/ | `src/chant/tones/*.json` (tone library); pointing on starter psalms | New content dir |
 | resources/ | Already present: St Dunstan PDFs, Plainsong Psalter PDF | Reference only |
+
+## Copyright guardrail
+
+Design Decision #14 (Marian antiphons: Latin-only from GregoBase CC0; English deferred) stands as of 2026-04-22. The following printed sources are **reference only** — their editorial pointings, typography, English adaptations, and translations are copyrighted and must **not** be reproduced in Venite's shipped data:
+
+- **St Dunstan's Plainsong Psalter** (Andrewes Press, 2002) — we draw on its **structural conventions** (dot for cadence start, asterisk for caesura, flex on long verses only, the ~8% dactylic-ending convention) but never copy its specific pointed verses.
+- **Litton — The Plainsong Psalter** (1988) — tone assignments to BCP 1979. Reference for comparison only.
+- **Anglican Chant Psalter** (1987) — reference for comparison only.
+
+Ancient Sarum melodic formulas and Latin chant texts are public domain and free to include. Our editorial pointings (Ps 23, Ps 95, and any future corpus) are our own output, produced by the in-house algorithmic pointer + hand-correction via `/chant-pointing`.
+
+## Phase 1 shipped
+
+Phase 1 ran Apr 2026 across 43 commits on `claude/chant-phase-1` (Waves 0–6). What actually landed:
+
+- **LDF types** (`ldf/src/chant/`): `pitch.ts`, `neume-group.ts`, `mediation.ts`, `differentia.ts`, `tone-variant.ts`, `tone-file.ts`, `chant-data.ts`, `pointing.ts`, `psalm-tone-assignment.ts`, `format-tone-id.ts`, `generate-gabc.ts`, `point-psalm.ts`. Metadata widened on `Psalm` / `Refrain` / `Text` / `ResponsivePrayer` to carry `ChantData` and `PsalmPointing`.
+- **Tone library**: 9 JSON files (`tone-1.json` … `tone-8.json` + `tone-peregrinus.json`) in `commonprayer/src/chant/tones/`. Public-domain provenance; structural validation test in `ldf/tests/`.
+- **Golden-fixture pointing**: hand-pointed Ps 23 + Ps 95 in `commonprayer/src/chant/pointing/` plus a pre-aggregated `psalms-bcp1979.json` for runtime lookup.
+- **Pointing algorithm**: `point-psalm.ts` in-house adapter over vendored `bbloomf/jgabc/psalmtone.js` (Unlicense / public domain) + attributions in `ldf/src/chant/vendor/ATTRIBUTIONS.md`.
+- **Stencil component**: `<ldf-chant-pointing>` (CSS overlay) in `components/src/components/chant-pointing/` (`chant-pointing.tsx` + `.scss` + `.e2e.ts`). Rendered inline by `<ldf-psalm>` when `metadata.pointing` is present. Psalm SCSS updated with decorated drop-cap for verse 1.
+- **DisplaySettings additions**: three new fields — `chantNotation: 'off' | 'collapsed' | 'always' | 'tablet-only'`, `chantTradition`, `psalmsBold`. Positional constructor alignment fixed (commit `3121480b`) after a late UAT caught a mismatch.
+- **DisplaySettings modal**: pickers for `chantNotation` and `psalmsBold` added; `DisplaySettingsModule` extracted so `/psalter` shares the same modal as `/pray` (commits `f55b95df`, `8aa92e63`).
+- **Wire-through**: `displaySettings` now threaded through `<ldf-liturgical-document>` → `<ldf-psalm>` on `/pray`, `/psalter`, and `/daily-readings`. `<ldf-psalm>` performs a render-time fetch of the pointing table from `/offline/chant/pointing/psalms-bcp1979.json`.
+- **Offline sync script**: `scripts/sync-chant-offline.js` aggregates `commonprayer/src/chant/tones/*.json` into `app/src/offline/chant/tones.json` (9 tones). Wired into `app/angular.json` assets. Pointing fixtures mirrored to `app/src/offline/chant/pointing/`.
+- **Psalter default**: default psalm on `/psalter` changed from 1 → 23 so the golden fixture is the first thing users see (commit `23c9b73a`).
+- **Skill**: `/chant-pointing` skill definition at `.planning/skills/chant-pointing.md` for iterative pointing correction.
+- **Tests**: 205 ldf tests pass (5 pre-existing baseline failures documented in `.planning/BASELINE-KNOWN-ISSUES.md`); Stencil e2e + Karma smoke spec for pray page added.
+
+See `.planning/PHASE-1-SUMMARY.md` for the tight reference-card version.
