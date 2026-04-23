@@ -3,6 +3,186 @@
   "source": "venite-editorial",
   "_comment": "Aggregator for all BCP 1979 psalms with pointing. Phase 1 ships Ps 23 and Ps 95 as golden fixtures; additional psalms added iteratively. Editorial choices follow St Dunstan structural conventions but are Venite's own output; no specific pointings from any copyrighted psalter were reproduced.",
   "psalms": {
+    "1": {
+      "1": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "intonationWords": 2
+      },
+      "2": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "3": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 11,
+          "inflected": true
+        }
+      },
+      "4": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "5": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "6": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      }
+    },
+    "4": {
+      "1": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "intonationWords": 2
+      },
+      "2": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "3": {
+        "mediantAccent": 0,
+        "finalAccent": 1
+      },
+      "4": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "5": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "6": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 7,
+          "inflected": true
+        }
+      },
+      "7": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "8": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      }
+    },
+    "8": {
+      "1": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "intonationWords": 2
+      },
+      "2": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "3": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "4": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "5": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "6": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "7": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "8": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "9": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "10": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      }
+    },
+    "19": {
+      "1": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "intonationWords": 2
+      },
+      "2": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "3": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "4": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "5": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "6": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 9,
+          "inflected": true
+        }
+      },
+      "7": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "8": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "9": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "10": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "11": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "12": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "13": {
+        "mediantAccent": 1,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 7,
+          "inflected": true
+        }
+      },
+      "14": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      }
+    },
     "23": {
       "1": {
         "mediantAccent": 0,
@@ -20,7 +200,10 @@
       "4": {
         "mediantAccent": 0,
         "finalAccent": 1,
-        "flex": { "wordFromEnd": 5, "inflected": true },
+        "flex": {
+          "wordFromEnd": 5,
+          "inflected": true
+        },
         "ending": "dactylic"
       },
       "5": {
@@ -29,6 +212,540 @@
       },
       "6": {
         "mediantAccent": 0,
+        "finalAccent": 0
+      }
+    },
+    "24": {
+      "1": {
+        "mediantAccent": 1,
+        "finalAccent": 0,
+        "intonationWords": 2
+      },
+      "2": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "3": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "4": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "5": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "6": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "7": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 6,
+          "inflected": true
+        }
+      },
+      "8": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "9": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 6,
+          "inflected": true
+        }
+      },
+      "10": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      }
+    },
+    "27": {
+      "1": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 5,
+          "inflected": true
+        },
+        "intonationWords": 2
+      },
+      "2": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "3": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "4": {
+        "mediantAccent": 1,
+        "finalAccent": 1
+      },
+      "5": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 4,
+          "inflected": true
+        }
+      },
+      "6": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "7": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "8": {
+        "mediantAccent": 0,
+        "finalAccent": 1,
+        "ending": "dactylic"
+      },
+      "9": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 5,
+          "inflected": true
+        }
+      },
+      "10": {
+        "mediantAccent": 0,
+        "finalAccent": 1,
+        "ending": "dactylic"
+      },
+      "11": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "12": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "13": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 4,
+          "inflected": true
+        }
+      },
+      "14": {
+        "mediantAccent": 1,
+        "finalAccent": 1,
+        "ending": "dactylic"
+      },
+      "15": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "16": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "17": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 9,
+          "inflected": true
+        }
+      },
+      "18": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 8,
+          "inflected": true
+        }
+      }
+    },
+    "42": {
+      "1": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "intonationWords": 2
+      },
+      "2": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "3": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "4": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "5": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "6": {
+        "mediantAccent": 0,
+        "finalAccent": 1,
+        "ending": "dactylic"
+      },
+      "7": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "8": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "9": {
+        "mediantAccent": 0,
+        "finalAccent": 1,
+        "ending": "dactylic"
+      },
+      "10": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "11": {
+        "mediantAccent": 1,
+        "finalAccent": 1,
+        "flex": {
+          "wordFromEnd": 5,
+          "inflected": true
+        },
+        "ending": "dactylic"
+      },
+      "12": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "13": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "14": {
+        "mediantAccent": 0,
+        "finalAccent": 1,
+        "ending": "dactylic"
+      },
+      "15": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      }
+    },
+    "51": {
+      "1": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "intonationWords": 2
+      },
+      "2": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "3": {
+        "mediantAccent": 0,
+        "finalAccent": 1,
+        "ending": "dactylic"
+      },
+      "4": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "5": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "6": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "7": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "8": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "9": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "10": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "11": {
+        "mediantAccent": 0,
+        "finalAccent": 1,
+        "ending": "dactylic"
+      },
+      "12": {
+        "mediantAccent": 0,
+        "finalAccent": 1
+      },
+      "13": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "14": {
+        "mediantAccent": 0,
+        "finalAccent": 1
+      },
+      "15": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "16": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "17": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "18": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "19": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "20": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 4,
+          "inflected": true
+        }
+      }
+    },
+    "63": {
+      "1": {
+        "mediantAccent": 1,
+        "finalAccent": 0,
+        "intonationWords": 2
+      },
+      "2": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "3": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "4": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "5": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "6": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "7": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "8": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "9": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "10": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "11": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 9,
+          "inflected": true
+        }
+      }
+    },
+    "67": {
+      "1": {
+        "mediantAccent": 1,
+        "finalAccent": 1,
+        "intonationWords": 2
+      },
+      "2": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "3": {
+        "mediantAccent": 0,
+        "finalAccent": 1
+      },
+      "4": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "5": {
+        "mediantAccent": 0,
+        "finalAccent": 1
+      },
+      "6": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "7": {
+        "mediantAccent": 0,
+        "finalAccent": 1
+      }
+    },
+    "84": {
+      "1": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "intonationWords": 2
+      },
+      "2": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 11,
+          "inflected": true
+        }
+      },
+      "3": {
+        "mediantAccent": 0,
+        "finalAccent": 1,
+        "ending": "dactylic"
+      },
+      "4": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "5": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "6": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "7": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "8": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "9": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "10": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "11": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "12": {
+        "mediantAccent": 0,
+        "finalAccent": 1
+      }
+    },
+    "91": {
+      "1": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "intonationWords": 2
+      },
+      "2": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 7,
+          "inflected": true
+        }
+      },
+      "3": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "4": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 8,
+          "inflected": true
+        }
+      },
+      "5": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "6": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "7": {
+        "mediantAccent": 0,
+        "finalAccent": 1,
+        "flex": {
+          "wordFromEnd": 7,
+          "inflected": true
+        }
+      },
+      "8": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "9": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "10": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "11": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "12": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "13": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "14": {
+        "mediantAccent": 1,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 5,
+          "inflected": true
+        }
+      },
+      "15": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "16": {
+        "mediantAccent": 1,
         "finalAccent": 0
       }
     },
@@ -61,12 +778,18 @@
       "7": {
         "mediantAccent": 0,
         "finalAccent": 0,
-        "flex": { "wordFromEnd": 14, "inflected": true }
+        "flex": {
+          "wordFromEnd": 14,
+          "inflected": true
+        }
       },
       "8": {
         "mediantAccent": 0,
         "finalAccent": 1,
-        "flex": { "wordFromEnd": 7, "inflected": true },
+        "flex": {
+          "wordFromEnd": 7,
+          "inflected": true
+        },
         "ending": "dactylic"
       },
       "9": {
@@ -79,6 +802,322 @@
       },
       "11": {
         "mediantAccent": 0,
+        "finalAccent": 0
+      }
+    },
+    "100": {
+      "1": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "intonationWords": 2
+      },
+      "2": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "3": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 6,
+          "inflected": true
+        }
+      },
+      "4": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 4,
+          "inflected": true
+        }
+      }
+    },
+    "103": {
+      "1": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "intonationWords": 2
+      },
+      "2": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "3": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "4": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "5": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "6": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "7": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "8": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "9": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "10": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "11": {
+        "mediantAccent": 0,
+        "finalAccent": 1
+      },
+      "12": {
+        "mediantAccent": 0,
+        "finalAccent": 1
+      },
+      "13": {
+        "mediantAccent": 0,
+        "finalAccent": 1
+      },
+      "14": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "15": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "16": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "17": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "18": {
+        "mediantAccent": 0,
+        "finalAccent": 1
+      },
+      "19": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "20": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 7,
+          "inflected": true
+        }
+      },
+      "21": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "22": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 6,
+          "inflected": true
+        }
+      }
+    },
+    "121": {
+      "1": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "intonationWords": 2
+      },
+      "2": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "3": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "4": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "5": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "6": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "7": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "8": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      }
+    },
+    "130": {
+      "1": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 4,
+          "inflected": true
+        },
+        "intonationWords": 2
+      },
+      "2": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "3": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "4": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "5": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 6,
+          "inflected": true
+        }
+      },
+      "6": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "7": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      }
+    },
+    "134": {
+      "1": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "intonationWords": 2
+      },
+      "2": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      }
+    },
+    "139": {
+      "1": {
+        "mediantAccent": 1,
+        "finalAccent": 0,
+        "intonationWords": 2
+      },
+      "2": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "3": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "4": {
+        "mediantAccent": 0,
+        "finalAccent": 1,
+        "ending": "dactylic"
+      },
+      "5": {
+        "mediantAccent": 1,
+        "finalAccent": 1
+      },
+      "6": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "7": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "8": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "9": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "10": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "11": {
+        "mediantAccent": 0,
+        "finalAccent": 0,
+        "flex": {
+          "wordFromEnd": 8,
+          "inflected": true
+        }
+      },
+      "12": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "13": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "14": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "15": {
+        "mediantAccent": 0,
+        "finalAccent": 1,
+        "flex": {
+          "wordFromEnd": 8,
+          "inflected": true
+        }
+      },
+      "16": {
+        "mediantAccent": 0,
+        "finalAccent": 1
+      },
+      "17": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "18": {
+        "mediantAccent": 0,
+        "finalAccent": 1
+      },
+      "19": {
+        "mediantAccent": 1,
+        "finalAccent": 0
+      },
+      "20": {
+        "mediantAccent": 1,
+        "finalAccent": 1,
+        "ending": "dactylic"
+      },
+      "21": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "22": {
+        "mediantAccent": 0,
+        "finalAccent": 0
+      },
+      "23": {
+        "mediantAccent": 1,
         "finalAccent": 0
       }
     }
