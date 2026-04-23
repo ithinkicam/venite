@@ -140,6 +140,13 @@
       "none": "Off",
       "alternate": "Alternate verses",
       "all": "All accents"
+    },
+    "chantNotation": {
+      "label": "Chant notation",
+      "off": "Off",
+      "collapsed": "Collapsed",
+      "always": "Always on",
+      "tabletOnly": "Tablet only"
     }
   },
   "editor": {

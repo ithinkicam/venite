@@ -144,6 +144,15 @@
       </ion-select>
     </ion-item>
     <ion-item>
+      <ion-label position="stacked">{{ 'displaySettings.chantNotation.label' | translate }}</ion-label>
+      <ion-select [value]="settings.chantNotation" (ionChange)="updateSetting(uid, 'chantNotation', $event)">
+        <ion-select-option value="off">{{ 'displaySettings.chantNotation.off' | translate }}</ion-select-option>
+        <ion-select-option value="collapsed">{{ 'displaySettings.chantNotation.collapsed' | translate }}</ion-select-option>
+        <ion-select-option value="always">{{ 'displaySettings.chantNotation.always' | translate }}</ion-select-option>
+        <ion-select-option value="tablet-only">{{ 'displaySettings.chantNotation.tabletOnly' | translate }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
       <ion-label>{{ 'displaySettings.Reading-Verses' | translate }}</ion-label>
       <ion-checkbox [value]="settings.bibleVerses" [checked]="settings.bibleVerses" (ionChange)="updateSetting(uid, 'bibleVerses', $event)" slot="start"></ion-checkbox>
     </ion-item>
