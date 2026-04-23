@@ -1,0 +1,41 @@
+{
+  "_meta": {
+    "status": "DRAFT — algorithmic first pass",
+    "generated": "2026-04-23",
+    "generator": "ldf/src/chant/point-psalm.ts via scripts/batch-point-psalms.js",
+    "notice": "Needs editorial review via /chant-pointing skill. NOT a final pointing."
+  },
+  "psalm": "1",
+  "source": "venite-editorial",
+  "verses": {
+    "1": {
+      "mediantAccent": 0,
+      "finalAccent": 0,
+      "intonationWords": 2
+    },
+    "2": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    },
+    "3": {
+      "mediantAccent": 0,
+      "finalAccent": 0,
+      "flex": {
+        "wordFromEnd": 11,
+        "inflected": true
+      }
+    },
+    "4": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    },
+    "5": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    },
+    "6": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "_meta": {
+    "status": "DRAFT — algorithmic first pass",
+    "generated": "2026-04-23",
+    "generator": "ldf/src/chant/point-psalm.ts via scripts/batch-point-psalms.js",
+    "notice": "Needs editorial review via /chant-pointing skill. NOT a final pointing."
+  },
+  "psalm": "42",
+  "source": "venite-editorial",
+  "verses": {
+    "1": {
+      "mediantAccent": 0,
+      "finalAccent": 0,
+      "intonationWords": 2
+    },
+    "2": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    },
+    "3": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    },
+    "4": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    },
+    "5": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    },
+    "6": {
+      "mediantAccent": 0,
+      "finalAccent": 1,
+      "ending": "dactylic"
+    },
+    "7": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    },
+    "8": {
+      "mediantAccent": 1,
+      "finalAccent": 0
+    },
+    "9": {
+      "mediantAccent": 0,
+      "finalAccent": 1,
+      "ending": "dactylic"
+    },
+    "10": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    },
+    "11": {
+      "mediantAccent": 1,
+      "finalAccent": 1,
+      "flex": {
+        "wordFromEnd": 5,
+        "inflected": true
+      },
+      "ending": "dactylic"
+    },
+    "12": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    },
+    "13": {
+      "mediantAccent": 1,
+      "finalAccent": 0
+    },
+    "14": {
+      "mediantAccent": 0,
+      "finalAccent": 1,
+      "ending": "dactylic"
+    },
+    "15": {
+      "mediantAccent": 0,
+      "finalAccent": 0
+    }
+  }
+}
