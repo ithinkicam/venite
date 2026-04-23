@@ -49,12 +49,12 @@ import { FormControl } from "@angular/forms";
   ],
 })
 export class PsalterPage implements OnInit {
-  psalmNumber: number = 1;
+  psalmNumber: number = 23;
   psalmNumberOptions: string[] = Array.apply(null, Array(150)).map((_, i) =>
     (i + 1).toString()
   );
 
-  number: FormControl = new FormControl(1);
+  number: FormControl = new FormControl(23);
   language: FormControl = new FormControl("en");
   version: FormControl = new FormControl("bcp1979");
   languageOptions$: Observable<{ value: string; label: string }[]>;
