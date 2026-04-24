@@ -1,0 +1,33 @@
+// Exsurge measures and shapes glyphs using a custom OpenType font for the
+// staff/neume characters. Both the font-file's PostScript name
+// ("ExsurgeChar") and the family name Exsurge requests at draw time
+// ("Exsurge Characters") are declared so the font resolves whichever
+// way the SVG references it.
+@font-face {
+  font-family: 'ExsurgeChar';
+  src: url('/offline/chant/fonts/ExsurgeChar.otf') format('opentype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Exsurge Characters';
+  src: url('/offline/chant/fonts/ExsurgeChar.otf') format('opentype');
+  font-display: swap;
+}
+
+:host {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+// Hide the host entirely if a render error occurred — the parent's
+// chant-pointing / plain-text overlay still carries the verse text.
+:host(.error) {
+  display: none;
+}
+
+:host svg {
+  max-width: 100%;
+  height: auto;
+}
