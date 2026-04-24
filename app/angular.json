@@ -50,6 +50,11 @@
                 "input": "node_modules/@venite/components/dist/collection/i18n",
                 "output": "i18n"
               },
+              {
+                "glob": "ExsurgeChar.otf",
+                "input": "node_modules/exsurge/assets/fonts/",
+                "output": "/offline/chant/fonts/"
+              },
               "src/manifest.webmanifest",
               "src/manifest.webmanifest"
             ],
