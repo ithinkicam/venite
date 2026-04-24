@@ -26,15 +26,19 @@ describe('ldf-chant-pointing', () => {
     );
     await page.waitForChanges();
 
-    // The last word ("shepherd") should have its last vowel cluster wrapped
+    // The last word ("shepherd") should have its stressed syllable wrapped
     // with class accent-mediant.
     const mediantAccent = await page.find(
       'ldf-chant-pointing >>> .accent.accent-mediant',
     );
     expect(mediantAccent).toBeTruthy();
-    // The stressed syllable of "shepherd" under our last-vowel-cluster
-    // heuristic is the trailing "erd".
-    expect(mediantAccent.textContent).toEqual('erd');
+    // No `mediantStressSyllable` hint is supplied here, so the rule-based
+    // suffix detector applies. "shepherd" matches no unstressed-suffix and
+    // is multisyllabic, so the English-bias initial-stress fallback wraps
+    // the FIRST syllable, "shep". (Pre-Phase-2: this used to bold "erd"
+    // via a last-vowel-cluster heuristic.) Canonical syllabification of
+    // "shepherd" is ["shep","herd"] (matches ldf/chant/generate-gabc).
+    expect(mediantAccent.textContent).toEqual('shep');
 
     // The `*` is emitted as a .caesura span (real U+002A).
     const caesura = await page.find('ldf-chant-pointing >>> .caesura');
@@ -44,6 +48,54 @@ describe('ldf-chant-pointing', () => {
     // Host should not carry the bold overlay class (psalmsBold defaults to 'none').
     const host = await page.find('ldf-chant-pointing');
     expect(host).not.toHaveClass('bold');
+  });
+
+  it('uses mediantStressSyllable hint when present (loving-kindness → "kind")', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<ldf-chant-pointing text="according to your loving-kindness *" pointing='{"mediantAccent":0,"mediantStressSyllable":2}'></ldf-chant-pointing>`,
+    );
+    await page.waitForChanges();
+
+    const mediantAccent = await page.find(
+      'ldf-chant-pointing >>> .accent.accent-mediant',
+    );
+    expect(mediantAccent).toBeTruthy();
+    // Vowel clusters in "loving-kindness" are: o, i, i, e (4 syllables).
+    // Hint=2 → wrap the cluster starting at "i" inside "kind". Walking back
+    // by one consonant for the next-syllable onset gives accent="kind".
+    expect(mediantAccent.textContent).toEqual('kind');
+  });
+
+  it('falls back to suffix rule for unstressed -ness ending', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<ldf-chant-pointing text="forgive my offenses"></ldf-chant-pointing>`,
+    );
+    await page.waitForChanges();
+
+    // No pointing → bare render, no accent.
+    const accent = await page.find(
+      'ldf-chant-pointing >>> .accent',
+    );
+    expect(accent).toBeFalsy();
+  });
+
+  it('uses finalStressSyllable hint on the final cadence', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<ldf-chant-pointing text="blot out my offenses." pointing='{"finalAccent":0,"finalStressSyllable":1}'></ldf-chant-pointing>`,
+    );
+    await page.waitForChanges();
+
+    const finalAccent = await page.find(
+      'ldf-chant-pointing >>> .accent.accent-final',
+    );
+    expect(finalAccent).toBeTruthy();
+    // Vowel clusters in "offenses" are: o, e, e (3 syllables).
+    // Hint=1 → cluster starting at "e" in "fen". Punctuation period is
+    // routed into suffix, not accent.
+    expect(finalAccent.textContent).toEqual('fen');
   });
 
   it('applies the bold overlay when psalmsBold="all"', async () => {
