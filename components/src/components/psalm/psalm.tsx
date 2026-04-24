@@ -80,6 +80,51 @@ function __resetPointingTableCacheForTests() {
 // Silence TS "declared but never read" — kept for future test wiring.
 void __resetPointingTableCacheForTests;
 
+/**
+ * Module-scope cache + loader for the aggregate tones JSON. Phase 2 W1
+ * hardcodes the lookup to Tone I A (variant index 0, differentia index 0)
+ * because the canticle/preference plumbing for picking a tone per psalm
+ * does not exist yet. Loader is fail-open: any fetch / parse failure
+ * resolves to `null`, and `<ldf-psalm>` falls through to the existing
+ * pointing-only render path.
+ */
+type ToneSnapshot = { variant: any; differentia: any } | null;
+let toneOnePromise: Promise<ToneSnapshot> | null = null;
+
+function loadToneOne(): Promise<ToneSnapshot> {
+  if (toneOnePromise) return toneOnePromise;
+  toneOnePromise = fetch('/offline/chant/tones.json')
+    .then((r) => (r.ok ? r.json() : null))
+    .then((data) => {
+      const tonesField = data?.tones || data;
+      // tones may be an array or an object keyed by id.
+      const list = Array.isArray(tonesField)
+        ? tonesField
+        : tonesField
+        ? Object.values(tonesField)
+        : [];
+      const tone1: any = list.find(
+        (t: any) =>
+          t?.id === 'tone-1' || t?.id === '1' || t?.toneId === 'tone-1',
+      );
+      if (!tone1) return null;
+      const variant = tone1.variants?.[0];
+      // Differentiae live inside the variant in the canonical `ToneFile`
+      // shape; the legacy top-level keys are accepted as a fallback.
+      const differentia =
+        variant?.differentiae?.[0] ||
+        tone1.differentiae?.[0] ||
+        tone1.differentia?.[0];
+      if (!variant || !differentia) return null;
+      return { variant, differentia };
+    })
+    .catch((err) => {
+      console.warn('[ldf-psalm] Could not load Tone 1:', err);
+      return null;
+    });
+  return toneOnePromise;
+}
+
 @Component({
   tag: 'ldf-psalm',
   styleUrl: 'psalm.scss',
@@ -98,6 +143,11 @@ export class PsalmComponent {
    *  `loadPointingTable()` in `componentWillLoad`. Empty object when the
    *  fetch fails (fail-open, renders plain text). */
   @State() pointingTable?: PointingTable;
+  /** Tone I A snapshot (`{ variant, differentia }`) loaded from
+   *  `/offline/chant/tones.json`. Populated by `loadToneOne()` in
+   *  `componentWillLoad`. `null` when the fetch fails or the tone is
+   *  missing — Phase 2 W1 silently skips notation rendering in that case. */
+  @State() toneOne?: ToneSnapshot;
 
   // Properties
   /** The LDF Psalm to be rendered, either as JSON or an Object */
@@ -145,6 +195,9 @@ export class PsalmComponent {
     // psalter-version preference through.
     const table = await loadPointingTable();
     this.pointingTable = table;
+    // Load Tone I A. Fails open → `toneOne` stays undefined and the
+    // notation render path silently skips.
+    this.toneOne = await loadToneOne();
   }
 
   // Private methods
@@ -223,14 +276,30 @@ export class PsalmComponent {
   ) : JSX.Element {
     const pointing = this.pointingFor(verse?.number);
     if (pointing) {
+      // When chantNotation === 'always' AND a Tone I snapshot is loaded,
+      // render `<ldf-chant-notation>` ABOVE the existing chant-pointing
+      // overlay. Other `chantNotation` values ('off', 'collapsed',
+      // 'tablet-only') leave the overlay-only path unchanged.
+      const showNotation =
+        this.displaySettings?.chantNotation === 'always' && Boolean(this.toneOne);
       return (
-        <ldf-chant-pointing
-          text={text}
-          pointing={JSON.stringify(pointing)}
-          psalmsBold={this.displaySettings?.psalmsBold ?? 'none'}
-          verseIndex={verseRenderIndex}
-          ariaLabel={text}
-        ></ldf-chant-pointing>
+        <div class="verse-with-chant">
+          {showNotation && (
+            <ldf-chant-notation
+              text={text}
+              tone={JSON.stringify(this.toneOne.variant)}
+              differentia={JSON.stringify(this.toneOne.differentia)}
+              pointing={JSON.stringify(pointing)}
+            ></ldf-chant-notation>
+          )}
+          <ldf-chant-pointing
+            text={text}
+            pointing={JSON.stringify(pointing)}
+            psalmsBold={this.displaySettings?.psalmsBold ?? 'none'}
+            verseIndex={verseRenderIndex}
+            ariaLabel={text}
+          ></ldf-chant-pointing>
+        </div>
       );
     }
     return (
