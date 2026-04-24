@@ -60,6 +60,8 @@ export function generateGabc(input: GenerateGabcInput): string {
     cadence: tone.mediation.cadence,
     flex: pointedVerse.flex,
     isFirstHalf: true,
+    accentWordFromEnd: pointedVerse.mediantAccent,
+    accentStressSyllable: pointedVerse.mediantStressSyllable,
   });
 
   const secondHalfRecitingTone = tone.secondRecitingTone ?? tone.recitingTone;
@@ -67,6 +69,8 @@ export function generateGabc(input: GenerateGabcInput): string {
     recitingTone: secondHalfRecitingTone,
     cadence: differentia.termination.cadence,
     isFirstHalf: false,
+    accentWordFromEnd: pointedVerse.finalAccent,
+    accentStressSyllable: pointedVerse.finalStressSyllable,
   });
 
   // --- 4. Emit GABC. ---
@@ -279,6 +283,19 @@ interface AssignHalfOptions {
   cadence: NeumeGroup[];
   flex?: { wordFromEnd: number; inflected: boolean };
   isFirstHalf: boolean;
+  /**
+   * Word-from-end index of the accented word in this half-verse (0 = last word).
+   * Sourced from `VersePointing.mediantAccent` (first half) or
+   * `VersePointing.finalAccent` (second half). When undefined, defaults to 0.
+   */
+  accentWordFromEnd?: number;
+  /**
+   * Syllable-from-start index (0-based) of the stressed syllable WITHIN the
+   * accented word. Sourced from `VersePointing.mediantStressSyllable` /
+   * `VersePointing.finalStressSyllable`. When undefined, defaults to 0
+   * (first syllable of the accented word).
+   */
+  accentStressSyllable?: number;
 }
 
 function assignHalf(words: SyllabifiedWord[], opts: AssignHalfOptions): AssignedWord[] {
@@ -296,18 +313,82 @@ function assignHalf(words: SyllabifiedWord[], opts: AssignHalfOptions): Assigned
   });
   if (flat.length === 0) return [];
 
-  // --- Apply cadence from the end ---
+  // --- Apply cadence aligned to the stressed syllable ---
+  // Find the `accent`-role group in the cadence. Its single neume must land on
+  // the stressed syllable of the accent word. Preparation groups walk
+  // BACKWARD from there; post-accent groups walk FORWARD.
+  //
+  // Trailing syllables after the post-accent run (or after the accent itself
+  // if the accent is the last group) stay on the reciting tone — this matches
+  // the Anglican "recite-then-cadence" convention. Those slots are already
+  // initialized to recitingTone above, so we don't need to touch them.
+  //
+  // Fallback: if no `accent`-role group exists (legacy / synthetic cadences),
+  // fall back to the prior "last N syllables, drop preparation from the front"
+  // alignment.
   const cadenceGroups = opts.cadence;
-  // Align cadence groups to the final N syllables; if fewer syllables than
-  // groups, drop from the front (preparation side). If more, the earlier
-  // syllables stay on the reciting tone.
-  const groupCount = cadenceGroups.length;
-  const startFromEnd = Math.min(groupCount, flat.length);
-  const firstCadIdx = flat.length - startFromEnd;
-  const droppedFront = groupCount - startFromEnd; // groups we had to drop
-  for (let i = 0; i < startFromEnd; i++) {
-    const group = cadenceGroups[droppedFront + i];
-    flat[firstCadIdx + i].pitches = [...group.notes];
+  const accentGroupIdx = cadenceGroups.findIndex((g) => g.role === 'accent');
+
+  // `firstCadIdx` is consumed below by the intonation block to avoid
+  // overwriting cadence syllables on very short verses. Compute it for both
+  // branches.
+  let firstCadIdx: number;
+
+  if (accentGroupIdx < 0) {
+    // --- Fallback: legacy "last N syllables" alignment ---
+    const groupCount = cadenceGroups.length;
+    const startFromEnd = Math.min(groupCount, flat.length);
+    firstCadIdx = flat.length - startFromEnd;
+    const droppedFront = groupCount - startFromEnd; // groups we had to drop
+    for (let i = 0; i < startFromEnd; i++) {
+      const group = cadenceGroups[droppedFront + i];
+      flat[firstCadIdx + i].pitches = [...group.notes];
+    }
+  } else {
+    // --- Stress-aligned placement ---
+    const accentWordFromEnd = opts.accentWordFromEnd ?? 0;
+    const stressSyllable = opts.accentStressSyllable ?? 0;
+    const accentWordIdx = words.length - 1 - accentWordFromEnd;
+
+    // Resolve the flat index of the stressed syllable. If the word index or
+    // syllable index is out of range, fall back to the last flat syllable.
+    let stressedFlatIdx = flat.length - 1;
+    if (accentWordIdx >= 0 && accentWordIdx < words.length) {
+      const wordFlatIndices: number[] = [];
+      for (let i = 0; i < flat.length; i++) {
+        if (flat[i].wordIdx === accentWordIdx) wordFlatIndices.push(i);
+      }
+      if (wordFlatIndices.length > 0) {
+        const sIdx = Math.max(0, Math.min(stressSyllable, wordFlatIndices.length - 1));
+        stressedFlatIdx = wordFlatIndices[sIdx];
+      }
+    }
+
+    // Place the accent-role group on the stressed syllable.
+    flat[stressedFlatIdx].pitches = [...cadenceGroups[accentGroupIdx].notes];
+
+    // Place preparation groups BEFORE the accent, walking backward.
+    let earliestPlaced = stressedFlatIdx;
+    for (let g = accentGroupIdx - 1, idx = stressedFlatIdx - 1; g >= 0 && idx >= 0; g--, idx--) {
+      flat[idx].pitches = [...cadenceGroups[g].notes];
+      earliestPlaced = idx;
+    }
+    // (Preparation groups that don't fit before the stressed syllable get
+    // dropped, matching the legacy "dropFront" behavior.)
+
+    // Place post-accent groups AFTER the accent, walking forward. Any post-
+    // accent groups that overflow past the end of the half-verse are dropped.
+    for (
+      let g = accentGroupIdx + 1, idx = stressedFlatIdx + 1;
+      g < cadenceGroups.length && idx < flat.length;
+      g++, idx++
+    ) {
+      flat[idx].pitches = [...cadenceGroups[g].notes];
+    }
+
+    // For intonation-overwrite protection below, treat the earliest placed
+    // cadence syllable as the cadence boundary.
+    firstCadIdx = earliestPlaced;
   }
 
   // --- Apply intonation (first half, first verse only) ---

@@ -7,6 +7,7 @@ import {
   ToneVariant,
   Differentia,
   VersePointing,
+  NeumeGroup,
 } from '../src/chant';
 
 // ---------------------------------------------------------------------------
@@ -154,5 +155,118 @@ describe('generateGabc — flex handling on long verse', () => {
     expect(out.endsWith('(::)')).toBe(true);
     // Flex marker convention (Phase 1): emit `(;)` inline in the first half.
     expect(out).toContain('(;)');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Test 4: Cadence alignment respects `mediantStressSyllable`
+// (regression test for the stress-aware fix)
+// ---------------------------------------------------------------------------
+
+describe('generateGabc — cadence aligns to stressed syllable', () => {
+  it('places Tone I A mediation accent on "shep" of "shepherd", not "herd"', () => {
+    // Tone 1 A mediation: [preparation:G3, accent:A3]
+    // Reciting tone: A3.
+    // With mediantStressSyllable=0 (SHEP-herd), the accent neume (A3=h) should
+    // land on "shep" and the preparation neume (G3=g) on the preceding syllable
+    // ("my"). Before the fix, the preparation was placed on "shep" and the
+    // accent on "herd" — i.e. stress in the WRONG place for English prosody.
+    const tone1 = loadTone('tone-1');
+    const variant = findVariant(tone1, 'tone-1-a');
+    const differentia = findDifferentia(variant, '1');
+
+    const pointedVerse: VersePointing = {
+      mediantAccent: 0, // "shepherd" is the last word of the first half
+      finalAccent: 0, // "want" is the last word of the second half
+      mediantStressSyllable: 0, // stress on first syllable of "shepherd"
+      finalStressSyllable: 0,
+      // No intonation for this half so we can see the cadence syllables
+      // without interference.
+    };
+
+    const out = generateGabc({
+      tone: variant,
+      differentia,
+      pointedVerse,
+      text: 'The Lord is my shepherd; * I shall not be in want.',
+    });
+
+    // Preparation (G3=g) lands on "my" — the syllable BEFORE the stressed one.
+    expect(out).toContain('my(g)');
+    // Accent (A3=h) lands on "shep" (first syllable of "shepherd").
+    expect(out).toContain('shep(h)');
+    // "herd" stays on the reciting tone (also A3=h here; we assert it's not g).
+    expect(out).not.toMatch(/shep\(g\)/);
+    expect(out).not.toMatch(/herd;?\(g\)/);
+
+    // Second half: termination diff 1 = [prep:G3, accent:F3, post:E3, post:D3].
+    // finalStressSyllable=0 on "want" (single syllable, last word) places
+    // accent (F3=f) on "want" and preparation (G3=g) on "in". Post-accent
+    // groups overflow past the end and are dropped.
+    expect(out).toContain('in(g)');
+    expect(out).toContain('want.(f)');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Test 5: Fallback behavior when cadence has no `accent`-role group
+// ---------------------------------------------------------------------------
+
+describe('generateGabc — fallback when no accent role in cadence', () => {
+  it('uses legacy "last N syllables" alignment when cadence is accent-less', () => {
+    // Synthetic tone-variant + differentia with an all-preparation cadence
+    // (no `accent` role anywhere). The fix's stress-aware path should fall
+    // back to aligning cadence groups to the last N syllables of the half.
+    const variant: ToneVariant = {
+      id: 'synthetic',
+      label: 'synthetic',
+      isDefault: true,
+      mediationVariant: 'standard',
+      intonation: [],
+      recitingTone: { note: 'A', octave: 3 }, // h
+      mediation: {
+        // Purely preparation groups — no accent. Forces the fallback branch.
+        cadence: [
+          { notes: [{ note: 'G', octave: 3 }], role: 'preparation' }, // g
+          { notes: [{ note: 'F', octave: 3 }], role: 'preparation' }, // f
+        ] as NeumeGroup[],
+      },
+      differentiae: [],
+    };
+    const differentia: Differentia = {
+      id: 'synthetic-end',
+      label: 'synthetic-end',
+      termination: {
+        // Purely post-accent groups — no accent. Forces fallback.
+        cadence: [
+          { notes: [{ note: 'E', octave: 3 }], role: 'post-accent' }, // e
+          { notes: [{ note: 'D', octave: 3 }], role: 'post-accent' }, // d
+        ] as NeumeGroup[],
+      },
+    };
+
+    const pointedVerse: VersePointing = {
+      // These hints should be IGNORED on the fallback path.
+      mediantAccent: 0,
+      finalAccent: 0,
+      mediantStressSyllable: 0,
+      finalStressSyllable: 0,
+    };
+
+    const out = generateGabc({
+      tone: variant,
+      differentia,
+      pointedVerse,
+      // Three + three = six words; one syllable each.
+      text: 'foo bar baz * qux quux quuz',
+    });
+
+    // First half: legacy fallback places [prep:G, prep:F] on the last two
+    // syllables → "bar(g) baz(f)".
+    expect(out).toContain('bar(g)');
+    expect(out).toContain('baz(f)');
+    // Second half: [post:E, post:D] on the last two syllables → "quux(e) quuz(d)".
+    expect(out).toContain('quux(e)');
+    expect(out).toContain('quuz(d)');
   });
 });
