@@ -35,6 +35,23 @@ function parseProp<T>(p: T | string | undefined): T | null {
   return p;
 }
 
+/**
+ * Poll for `window.exsurge` (attached by the <script> tag in the consuming
+ * app). Resolves with the module or rejects after ~5s.
+ */
+function waitForExsurge(timeoutMs = 5000): Promise<any> {
+  return new Promise((resolve, reject) => {
+    const start = Date.now();
+    const check = () => {
+      const w: any = typeof window !== 'undefined' ? window : {};
+      if (w.exsurge) return resolve(w.exsurge);
+      if (Date.now() - start > timeoutMs) return reject(new Error('exsurge global not found'));
+      setTimeout(check, 50);
+    };
+    check();
+  });
+}
+
 @Component({
   tag: 'ldf-chant-notation',
   styleUrl: 'chant-notation.scss',
@@ -121,28 +138,51 @@ export class ChantNotationComponent {
         });
       }
 
-      // Wait for fonts so Exsurge measures text correctly.
-      try {
-        await (document as any).fonts?.ready;
-      } catch (_e) {
-        /* no-op — fonts API unavailable, e.g. in jsdom */
-      }
+      // Exsurge is loaded via a <script> tag in the consuming app's
+      // index.html (see app/src/index.html), so it attaches to
+      // `window.exsurge`. Rationale: Stencil's rollup pipeline cannot
+      // resolve a dynamic `import('exsurge')` specifier at component-build
+      // time (Exsurge is external to the components package), and the
+      // browser cannot resolve the bare specifier at runtime without an
+      // import map. A <script> tag is the simplest cross-bundler
+      // agreement. Poll briefly while the deferred script loads.
+      const exsurge: any = await waitForExsurge();
 
-      // Dynamic import keeps Exsurge out of the main bundle.
-      const exsurge: any = await import('exsurge');
+      // Force-load ExsurgeChar font before Exsurge measures any glyphs.
+      // `document.fonts.ready` alone is insufficient because @font-face
+      // declarations are loaded lazily on first visible use; a font
+      // declared globally but never painted will stay 'unloaded' and
+      // Exsurge's hyphenWidth check (in performLayoutAsync) retries
+      // forever with a pathological measurement.
+      try {
+        await (document as any).fonts?.load?.('16px "Exsurge Characters"');
+      } catch (_e) {
+        /* no-op — fonts API unavailable */
+      }
 
       const ctxt = new exsurge.ChantContext();
       const mappings = exsurge.Gabc.createMappingsFromSource(ctxt, gabcStr);
       const score = new exsurge.ChantScore(ctxt, mappings, true);
 
-      await new Promise<void>((resolve) =>
-        score.performLayout(ctxt, () => resolve()),
-      );
-      await new Promise<void>((resolve) =>
-        score.layoutChantLines(ctxt, this.width, () => resolve()),
-      );
+      // Exsurge API (v1.21.1) note — the README's example is stale:
+      //   * `performLayout(ctxt, force)` is the SYNC variant, whose
+      //     second arg is a boolean, NOT a callback.
+      //   * `layoutChantLines(ctxt, width, finishedCallback)` IS the
+      //     callback-based one.
+      //   * `createSvgNode(ctxt)` returns an SVGElement — there's no
+      //     `createDrawable` on ChantScore.
+      // We use the sync `performLayout` (fine for verse-sized inputs)
+      // plus the async `layoutChantLines`, then `createSvgNode`.
+      score.performLayout(ctxt);
+      await new Promise<void>((resolve) => {
+        let settled = false;
+        const done = () => { if (!settled) { settled = true; resolve(); } };
+        score.layoutChantLines(ctxt, this.width, done);
+        // Safety net: some Exsurge internal states never call back.
+        setTimeout(done, 4000);
+      });
 
-      const svgMarkup: string = score.createDrawable(ctxt);
+      const svgNode: SVGElement = score.createSvgNode(ctxt);
 
       // Insert into a child container; never replace the host's whole
       // innerHTML (Stencil owns the host).
@@ -154,7 +194,8 @@ export class ChantNotationComponent {
         container.className = 'chant-notation-svg';
         this.el.appendChild(container);
       }
-      container.innerHTML = svgMarkup;
+      container.innerHTML = '';
+      container.appendChild(svgNode);
     } catch (err: any) {
       this.error = String(err?.message || err);
       // eslint-disable-next-line no-console
