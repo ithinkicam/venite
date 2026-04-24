@@ -1,7 +1,7 @@
 {
   "_meta": {
     "status": "DRAFT — algorithmic first pass",
-    "generated": "2026-04-23",
+    "generated": "2026-04-24",
     "generator": "ldf/src/chant/point-psalm.ts via scripts/batch-point-psalms.js",
     "notice": "Needs editorial review via /chant-pointing skill. NOT a final pointing."
   },
@@ -11,11 +11,15 @@
     "1": {
       "mediantAccent": 0,
       "finalAccent": 0,
-      "intonationWords": 2
+      "intonationWords": 2,
+      "mediantStressSyllable": 0,
+      "finalStressSyllable": 0
     },
     "2": {
       "mediantAccent": 0,
-      "finalAccent": 0
+      "finalAccent": 0,
+      "mediantStressSyllable": 0,
+      "finalStressSyllable": 0
     },
     "3": {
       "mediantAccent": 0,
@@ -23,19 +27,27 @@
       "flex": {
         "wordFromEnd": 11,
         "inflected": true
-      }
+      },
+      "mediantStressSyllable": 0,
+      "finalStressSyllable": 0
     },
     "4": {
       "mediantAccent": 0,
-      "finalAccent": 0
+      "finalAccent": 0,
+      "mediantStressSyllable": 0,
+      "finalStressSyllable": 1
     },
     "5": {
       "mediantAccent": 0,
-      "finalAccent": 0
+      "finalAccent": 0,
+      "mediantStressSyllable": 0,
+      "finalStressSyllable": 0
     },
     "6": {
       "mediantAccent": 0,
-      "finalAccent": 0
+      "finalAccent": 0,
+      "mediantStressSyllable": 0,
+      "finalStressSyllable": 0
     }
   }
 }

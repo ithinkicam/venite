@@ -7,11 +7,15 @@
       "1": {
         "mediantAccent": 0,
         "finalAccent": 0,
-        "intonationWords": 2
+        "intonationWords": 2,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "2": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "3": {
         "mediantAccent": 0,
@@ -19,42 +23,60 @@
         "flex": {
           "wordFromEnd": 11,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "4": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "5": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "6": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       }
     },
     "4": {
       "1": {
         "mediantAccent": 0,
         "finalAccent": 0,
-        "intonationWords": 2
+        "intonationWords": 2,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "2": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "3": {
         "mediantAccent": 0,
-        "finalAccent": 1
+        "finalAccent": 1,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "4": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "5": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "6": {
         "mediantAccent": 0,
@@ -62,81 +84,117 @@
         "flex": {
           "wordFromEnd": 7,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "7": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "8": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 0
       }
     },
     "8": {
       "1": {
         "mediantAccent": 0,
         "finalAccent": 0,
-        "intonationWords": 2
+        "intonationWords": 2,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "2": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "3": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "4": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "5": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "6": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "7": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "8": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "9": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "10": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       }
     },
     "19": {
       "1": {
         "mediantAccent": 0,
         "finalAccent": 0,
-        "intonationWords": 2
+        "intonationWords": 2,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "2": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 1
       },
       "3": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "4": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "5": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "6": {
         "mediantAccent": 0,
@@ -144,31 +202,45 @@
         "flex": {
           "wordFromEnd": 9,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 0
       },
       "7": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "8": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "9": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 2
       },
       "10": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "11": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 1
       },
       "12": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 0
       },
       "13": {
         "mediantAccent": 1,
@@ -176,26 +248,35 @@
         "flex": {
           "wordFromEnd": 7,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "14": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0
       }
     },
     "23": {
       "1": {
         "mediantAccent": 0,
         "finalAccent": 0,
-        "intonationWords": 2
+        "intonationWords": 2,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "2": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "3": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "4": {
         "mediantAccent": 0,
@@ -204,42 +285,59 @@
           "wordFromEnd": 5,
           "inflected": true
         },
-        "ending": "dactylic"
+        "ending": "dactylic",
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "5": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "6": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       }
     },
     "24": {
       "1": {
         "mediantAccent": 1,
         "finalAccent": 0,
-        "intonationWords": 2
+        "intonationWords": 2,
+        "finalStressSyllable": 1
       },
       "2": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "3": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "4": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "5": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "6": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "7": {
         "mediantAccent": 0,
@@ -247,11 +345,14 @@
         "flex": {
           "wordFromEnd": 6,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 0
       },
       "8": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "9": {
         "mediantAccent": 0,
@@ -259,11 +360,14 @@
         "flex": {
           "wordFromEnd": 6,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 0
       },
       "10": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       }
     },
     "27": {
@@ -274,19 +378,26 @@
           "wordFromEnd": 5,
           "inflected": true
         },
-        "intonationWords": 2
+        "intonationWords": 2,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "2": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "3": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 1
       },
       "4": {
         "mediantAccent": 1,
-        "finalAccent": 1
+        "finalAccent": 1,
+        "mediantStressSyllable": 1
       },
       "5": {
         "mediantAccent": 0,
@@ -294,20 +405,28 @@
         "flex": {
           "wordFromEnd": 4,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "6": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "7": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "8": {
         "mediantAccent": 0,
         "finalAccent": 1,
-        "ending": "dactylic"
+        "ending": "dactylic",
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "9": {
         "mediantAccent": 0,
@@ -315,20 +434,27 @@
         "flex": {
           "wordFromEnd": 5,
           "inflected": true
-        }
+        },
+        "finalStressSyllable": 0
       },
       "10": {
         "mediantAccent": 0,
         "finalAccent": 1,
-        "ending": "dactylic"
+        "ending": "dactylic",
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "11": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "12": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "13": {
         "mediantAccent": 0,
@@ -336,20 +462,28 @@
         "flex": {
           "wordFromEnd": 4,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 1
       },
       "14": {
         "mediantAccent": 1,
         "finalAccent": 1,
-        "ending": "dactylic"
+        "ending": "dactylic",
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 1
       },
       "15": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "16": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "17": {
         "mediantAccent": 0,
@@ -357,7 +491,9 @@
         "flex": {
           "wordFromEnd": 9,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "18": {
         "mediantAccent": 0,
@@ -365,52 +501,74 @@
         "flex": {
           "wordFromEnd": 8,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       }
     },
     "42": {
       "1": {
         "mediantAccent": 0,
         "finalAccent": 0,
-        "intonationWords": 2
+        "intonationWords": 2,
+        "mediantStressSyllable": 2,
+        "finalStressSyllable": 0
       },
       "2": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "3": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "4": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "5": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 2
       },
       "6": {
         "mediantAccent": 0,
         "finalAccent": 1,
-        "ending": "dactylic"
+        "ending": "dactylic",
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "7": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "8": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 0
       },
       "9": {
         "mediantAccent": 0,
         "finalAccent": 1,
-        "ending": "dactylic"
+        "ending": "dactylic",
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "10": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "11": {
         "mediantAccent": 1,
@@ -419,105 +577,151 @@
           "wordFromEnd": 5,
           "inflected": true
         },
-        "ending": "dactylic"
+        "ending": "dactylic",
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 1
       },
       "12": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "13": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "14": {
         "mediantAccent": 0,
         "finalAccent": 1,
-        "ending": "dactylic"
+        "ending": "dactylic",
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "15": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       }
     },
     "51": {
       "1": {
         "mediantAccent": 0,
         "finalAccent": 0,
-        "intonationWords": 2
+        "intonationWords": 2,
+        "mediantStressSyllable": 2,
+        "finalStressSyllable": 1
       },
       "2": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "3": {
         "mediantAccent": 0,
         "finalAccent": 1,
-        "ending": "dactylic"
+        "ending": "dactylic",
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 1
       },
       "4": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "5": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "6": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "7": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 0
       },
       "8": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "9": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "finalStressSyllable": 1
       },
       "10": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0
       },
       "11": {
         "mediantAccent": 0,
         "finalAccent": 1,
-        "ending": "dactylic"
+        "ending": "dactylic",
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "12": {
         "mediantAccent": 0,
-        "finalAccent": 1
+        "finalAccent": 1,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "13": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 0
       },
       "14": {
         "mediantAccent": 0,
-        "finalAccent": 1
+        "finalAccent": 1,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "15": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "16": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "17": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "18": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "19": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "20": {
         "mediantAccent": 0,
@@ -525,50 +729,69 @@
         "flex": {
           "wordFromEnd": 4,
           "inflected": true
-        }
+        },
+        "finalStressSyllable": 0
       }
     },
     "63": {
       "1": {
         "mediantAccent": 1,
         "finalAccent": 0,
-        "intonationWords": 2
+        "intonationWords": 2,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "2": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "3": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 0
       },
       "4": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "5": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "finalStressSyllable": 0
       },
       "6": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "7": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "8": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "9": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 0
       },
       "10": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0
       },
       "11": {
         "mediantAccent": 0,
@@ -576,45 +799,63 @@
         "flex": {
           "wordFromEnd": 9,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       }
     },
     "67": {
       "1": {
         "mediantAccent": 1,
         "finalAccent": 1,
-        "intonationWords": 2
+        "intonationWords": 2,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "2": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "3": {
         "mediantAccent": 0,
-        "finalAccent": 1
+        "finalAccent": 1,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "4": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "5": {
         "mediantAccent": 0,
-        "finalAccent": 1
+        "finalAccent": 1,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "6": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 0
       },
       "7": {
         "mediantAccent": 0,
-        "finalAccent": 1
+        "finalAccent": 1,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       }
     },
     "84": {
       "1": {
         "mediantAccent": 0,
         "finalAccent": 0,
-        "intonationWords": 2
+        "intonationWords": 2,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "2": {
         "mediantAccent": 0,
@@ -622,55 +863,77 @@
         "flex": {
           "wordFromEnd": 11,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "3": {
         "mediantAccent": 0,
         "finalAccent": 1,
-        "ending": "dactylic"
+        "ending": "dactylic",
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "4": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "finalStressSyllable": 0
       },
       "5": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "6": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "7": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "8": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "9": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "10": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "11": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 1
       },
       "12": {
         "mediantAccent": 0,
-        "finalAccent": 1
+        "finalAccent": 1,
+        "mediantStressSyllable": 0
       }
     },
     "91": {
       "1": {
         "mediantAccent": 0,
         "finalAccent": 0,
-        "intonationWords": 2
+        "intonationWords": 2,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "2": {
         "mediantAccent": 0,
@@ -678,11 +941,15 @@
         "flex": {
           "wordFromEnd": 7,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "3": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "4": {
         "mediantAccent": 0,
@@ -690,15 +957,21 @@
         "flex": {
           "wordFromEnd": 8,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "5": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "6": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "7": {
         "mediantAccent": 0,
@@ -706,31 +979,45 @@
         "flex": {
           "wordFromEnd": 7,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "8": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 0
       },
       "9": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 2
       },
       "10": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "11": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "12": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "13": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "14": {
         "mediantAccent": 1,
@@ -738,42 +1025,60 @@
         "flex": {
           "wordFromEnd": 5,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 0
       },
       "15": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "16": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       }
     },
     "95": {
       "1": {
         "mediantAccent": 0,
         "finalAccent": 0,
-        "intonationWords": 2
+        "intonationWords": 2,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "2": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 0
       },
       "3": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "4": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "5": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "6": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "7": {
         "mediantAccent": 0,
@@ -781,7 +1086,9 @@
         "flex": {
           "wordFromEnd": 14,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "8": {
         "mediantAccent": 0,
@@ -790,30 +1097,42 @@
           "wordFromEnd": 7,
           "inflected": true
         },
-        "ending": "dactylic"
+        "ending": "dactylic",
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "9": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "10": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "11": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       }
     },
     "100": {
       "1": {
         "mediantAccent": 0,
         "finalAccent": 0,
-        "intonationWords": 2
+        "intonationWords": 2,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "2": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "3": {
         "mediantAccent": 0,
@@ -821,7 +1140,9 @@
         "flex": {
           "wordFromEnd": 6,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "4": {
         "mediantAccent": 0,
@@ -829,86 +1150,125 @@
         "flex": {
           "wordFromEnd": 4,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 2,
+        "finalStressSyllable": 0
       }
     },
     "103": {
       "1": {
         "mediantAccent": 0,
         "finalAccent": 0,
-        "intonationWords": 2
+        "intonationWords": 2,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "2": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "3": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "4": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 2
       },
       "5": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0
       },
       "6": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "7": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "8": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "9": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 0
       },
       "10": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "11": {
         "mediantAccent": 0,
-        "finalAccent": 1
+        "finalAccent": 1,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "12": {
         "mediantAccent": 0,
-        "finalAccent": 1
+        "finalAccent": 1,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "13": {
         "mediantAccent": 0,
-        "finalAccent": 1
+        "finalAccent": 1,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "14": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "15": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "16": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "17": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "18": {
         "mediantAccent": 0,
-        "finalAccent": 1
+        "finalAccent": 1,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "19": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "20": {
         "mediantAccent": 0,
@@ -916,11 +1276,15 @@
         "flex": {
           "wordFromEnd": 7,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "21": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "22": {
         "mediantAccent": 0,
@@ -928,42 +1292,59 @@
         "flex": {
           "wordFromEnd": 6,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 0
       }
     },
     "121": {
       "1": {
         "mediantAccent": 0,
         "finalAccent": 0,
-        "intonationWords": 2
+        "intonationWords": 2,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "2": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "3": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "4": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "5": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "6": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "7": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "8": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "finalStressSyllable": 0
       }
     },
     "130": {
@@ -974,19 +1355,26 @@
           "wordFromEnd": 4,
           "inflected": true
         },
-        "intonationWords": 2
+        "intonationWords": 2,
+        "mediantStressSyllable": 0
       },
       "2": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 0
       },
       "3": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "4": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "5": {
         "mediantAccent": 0,
@@ -994,70 +1382,100 @@
         "flex": {
           "wordFromEnd": 6,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "6": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "7": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 0
       }
     },
     "134": {
       "1": {
         "mediantAccent": 0,
         "finalAccent": 0,
-        "intonationWords": 2
+        "intonationWords": 2,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "2": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       }
     },
     "139": {
       "1": {
         "mediantAccent": 1,
         "finalAccent": 0,
-        "intonationWords": 2
+        "intonationWords": 2,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "2": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 2,
+        "finalStressSyllable": 0
       },
       "3": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 2
       },
       "4": {
         "mediantAccent": 0,
         "finalAccent": 1,
-        "ending": "dactylic"
+        "ending": "dactylic",
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 1
       },
       "5": {
         "mediantAccent": 1,
-        "finalAccent": 1
+        "finalAccent": 1,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "6": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "7": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "8": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "9": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "10": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "11": {
         "mediantAccent": 0,
@@ -1065,19 +1483,27 @@
         "flex": {
           "wordFromEnd": 8,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "12": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "13": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "14": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "15": {
         "mediantAccent": 0,
@@ -1085,40 +1511,57 @@
         "flex": {
           "wordFromEnd": 8,
           "inflected": true
-        }
+        },
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "16": {
         "mediantAccent": 0,
-        "finalAccent": 1
+        "finalAccent": 1,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "17": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "18": {
         "mediantAccent": 0,
-        "finalAccent": 1
+        "finalAccent": 1,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "19": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 1,
+        "finalStressSyllable": 0
       },
       "20": {
         "mediantAccent": 1,
         "finalAccent": 1,
-        "ending": "dactylic"
+        "ending": "dactylic",
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 1
       },
       "21": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "22": {
         "mediantAccent": 0,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "mediantStressSyllable": 0,
+        "finalStressSyllable": 0
       },
       "23": {
         "mediantAccent": 1,
-        "finalAccent": 0
+        "finalAccent": 0,
+        "finalStressSyllable": 2
       }
     }
   }
