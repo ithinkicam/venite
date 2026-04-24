@@ -13,6 +13,11 @@
  *   intonation formula (used on the first verse of a psalm).
  * - `ending`: optional classification of the final cadence pattern,
  *   e.g. `'dactylic'`.
+ * - `mediantStressSyllable` / `finalStressSyllable`: optional syllable
+ *   index hints (from start, 0-based) of the stressed syllable within the
+ *   mediant- / final-accented word. Populated when the pointer can resolve
+ *   stress (CMU dict hit). Renderers fall back to a rule-based suffix
+ *   detector when absent.
  */
 export interface VersePointing {
   mediantAccent?: number;
@@ -22,6 +27,13 @@ export interface VersePointing {
   preparatorySyllables?: number[];
   intonationWords?: number;
   ending?: 'dactylic';
+  /** Optional syllable hint: index (from start, 0-based) of the stressed
+   *  syllable within the mediant-accented word. Populated when the pointer
+   *  can resolve stress (CMU dict hit). Component falls back to a rule-based
+   *  suffix detector when absent. */
+  mediantStressSyllable?: number;
+  /** Same for the final-accented word. */
+  finalStressSyllable?: number;
 }
 
 /**

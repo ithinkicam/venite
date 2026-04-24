@@ -1,6 +1,7 @@
 import { syllabifyText } from './generate-gabc';
 import { ToneVariant } from './tone-variant';
 import { VersePointing } from './pointing';
+import { findStressSyllableIndex } from './stress-lookup';
 
 /**
  * Input for `pointVerse`.
@@ -128,7 +129,39 @@ export function pointVerse(input: PointVerseInput): VersePointing {
     pointing.intonationWords = defaultIntonationWords(tone);
   }
 
+  // 6. Optional stress-syllable hints. Look up the actual accent word in
+  //    the CMU dictionary; populate the hint only when the word resolves.
+  //    Renderers fall back to a rule-based suffix detector when absent, so
+  //    omitting the field on dict misses is fine (don't fabricate `null`).
+  const mediantWord = wordAtAccentPosition(cleanedFirstHalf, mediantAccent);
+  if (mediantWord) {
+    const stress = findStressSyllableIndex(mediantWord);
+    if (stress !== null) {
+      pointing.mediantStressSyllable = stress;
+    }
+  }
+  const finalWord = wordAtAccentPosition(secondHalfText, finalAccent);
+  if (finalWord) {
+    const stress = findStressSyllableIndex(finalWord);
+    if (stress !== null) {
+      pointing.finalStressSyllable = stress;
+    }
+  }
+
   return pointing;
+}
+
+/**
+ * Return the word at a `wordFromEnd` accent index within a half-verse, or
+ * `null` if the index is out of range. Punctuation is stripped via
+ * `tokenize`, matching the index convention used by the renderer.
+ */
+function wordAtAccentPosition(text: string, wordFromEnd: number): string | null {
+  const words = tokenize(text);
+  if (words.length === 0) return null;
+  const ix = words.length - 1 - wordFromEnd;
+  if (ix < 0 || ix >= words.length) return null;
+  return words[ix];
 }
 
 // ---------------------------------------------------------------------------

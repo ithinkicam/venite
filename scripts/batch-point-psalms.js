@@ -217,10 +217,21 @@ export async function batchPointPsalms(psalmNumbers = DEFAULT_PSALMS, opts = {})
   const toneVariant = await loadToneVariant();
 
   const written = [];
+  const merged = [];
   const skipped = [];
   for (const n of psalmNumbers) {
     if (HAND_POINTED.has(String(n))) {
-      skipped.push({ psalm: n, reason: 'hand-pointed (golden fixture)' });
+      // Hand-pointed fixtures: preserve every existing field but MERGE in
+      // build-time stress-syllable hints (`mediantStressSyllable` /
+      // `finalStressSyllable`) so the renderer's hint-driven splitter
+      // engages. This never touches `mediantAccent` / `finalAccent` /
+      // `flex` / `ending` — only adds the two new hint fields.
+      const stats = await mergeStressHintsInto(n, pointVerse, toneVariant);
+      merged.push({ psalm: n, ...stats });
+      log(
+        `[batch-point-psalms] merged stress hints into psalm ${n} ` +
+          `(${stats.hintsAdded} hints across ${stats.versesTouched} verses)`
+      );
       continue;
     }
     const psalterFile = path.join(PSALTER_DIR, `psalm-${n}.json`);
@@ -240,7 +251,75 @@ export async function batchPointPsalms(psalmNumbers = DEFAULT_PSALMS, opts = {})
   const agg = await regenerateAggregate();
   log(`[batch-point-psalms] aggregated ${agg.psalmCount} psalms → ${path.relative(REPO_ROOT, agg.aggregateFile)}`);
 
-  return { written, skipped, aggregate: agg };
+  // Stress-lookup hit-rate stats (build-time, for reporting).
+  let stressStats = null;
+  try {
+    const ldfChant = require(path.join(REPO_ROOT, 'ldf', 'dist', 'cjs', 'chant'));
+    if (typeof ldfChant.getStressLookupStats === 'function') {
+      stressStats = ldfChant.getStressLookupStats();
+      log(
+        `[batch-point-psalms] CMU stress-dict lookups: ` +
+          `${stressStats.succeeded}/${stressStats.attempted} succeeded`
+      );
+    }
+  } catch (_e) {
+    // Optional reporting; ignore failures.
+  }
+
+  return { written, merged, skipped, aggregate: agg, stressStats };
+}
+
+/**
+ * Merge build-time stress hints into an existing hand-pointed fixture
+ * without altering any of its existing fields. For each verse:
+ *   - Re-run `pointVerse` over the corresponding psalter verse to obtain
+ *     the freshly-computed `mediantStressSyllable` / `finalStressSyllable`.
+ *   - If the existing fixture already has a value for either field, leave
+ *     it intact (editorial wins). Otherwise add the hint when the fresh
+ *     pointing produced one.
+ * Writes the modified fixture back to disk in canonical key order.
+ */
+async function mergeStressHintsInto(psalmNumber, pointVerse, toneVariant) {
+  const fixtureFile = path.join(POINTING_DIR, `psalm-${psalmNumber}.json`);
+  const psalterFile = path.join(PSALTER_DIR, `psalm-${psalmNumber}.json`);
+  const fixture = await readJsonIfExists(fixtureFile);
+  const psalter = await readJsonIfExists(psalterFile);
+  if (!fixture || !psalter) {
+    return { hintsAdded: 0, versesTouched: 0, missing: true };
+  }
+  const verses = extractVerses(psalter);
+  let hintsAdded = 0;
+  let versesTouched = 0;
+  for (const v of verses) {
+    const existing = fixture.verses?.[v.number];
+    if (!existing) continue;
+    const fresh = pointVerse({
+      text: v.verse,
+      halfverse: v.halfverse,
+      tone: toneVariant,
+      isVerseOne: v.number === '1',
+    });
+    let touched = false;
+    if (
+      existing.mediantStressSyllable === undefined &&
+      typeof fresh.mediantStressSyllable === 'number'
+    ) {
+      existing.mediantStressSyllable = fresh.mediantStressSyllable;
+      hintsAdded += 1;
+      touched = true;
+    }
+    if (
+      existing.finalStressSyllable === undefined &&
+      typeof fresh.finalStressSyllable === 'number'
+    ) {
+      existing.finalStressSyllable = fresh.finalStressSyllable;
+      hintsAdded += 1;
+      touched = true;
+    }
+    if (touched) versesTouched += 1;
+  }
+  await writeJson(fixtureFile, fixture);
+  return { hintsAdded, versesTouched };
 }
 
 // CLI entry point.
