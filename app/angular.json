@@ -50,6 +50,16 @@
                 "input": "node_modules/@venite/components/dist/collection/i18n",
                 "output": "i18n"
               },
+              {
+                "glob": "ExsurgeChar.otf",
+                "input": "node_modules/exsurge/assets/fonts/",
+                "output": "/offline/chant/fonts/"
+              },
+              {
+                "glob": "exsurge.min.js",
+                "input": "node_modules/exsurge/dist/",
+                "output": "/offline/chant/"
+              },
               "src/manifest.webmanifest",
               "src/manifest.webmanifest"
             ],
@@ -154,7 +164,9 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "e2e": {
@@ -235,7 +247,9 @@
               "projects/reminders/tsconfig.lib.json",
               "projects/reminders/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -273,7 +287,9 @@
               "projects/interfaces/tsconfig.lib.json",
               "projects/interfaces/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -311,7 +327,9 @@
               "projects/service-api/tsconfig.lib.json",
               "projects/service-api/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -349,7 +367,9 @@
               "projects/localstorage/tsconfig.lib.json",
               "projects/localstorage/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -387,7 +407,9 @@
               "projects/darkmode/tsconfig.lib.json",
               "projects/darkmode/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -425,7 +447,9 @@
               "projects/platform/tsconfig.lib.json",
               "projects/platform/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -463,7 +487,9 @@
               "projects/pray-menu/tsconfig.lib.json",
               "projects/pray-menu/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -501,7 +527,9 @@
               "projects/pray/tsconfig.lib.json",
               "projects/pray/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }

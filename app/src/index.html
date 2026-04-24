@@ -28,11 +28,28 @@
   <meta name="theme-color" content="#1976d2">
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#1976d2">
+
+  <!-- ExsurgeChar font — needs a document-global @font-face so Exsurge can
+       measure glyph metrics when laying out chant. A component-scoped
+       @font-face in Stencil scss is not visible to Exsurge's runtime font
+       lookups, so it stalls in performLayoutAsync's hyphenWidth check. -->
+  <style>
+    @font-face {
+      font-family: 'Exsurge Characters';
+      src: url('/offline/chant/fonts/ExsurgeChar.otf') format('opentype');
+      font-display: block;
+    }
+  </style>
 </head>
 
 <body>
   <venite-root></venite-root>
   <noscript>Please enable JavaScript to continue using this application.</noscript>
+  <!-- Exsurge is loaded as a global script (UMD) because Stencil cannot
+       resolve a bare `import('exsurge')` at component-build time and the
+       browser cannot resolve the specifier at runtime. Attaches to
+       `window.exsurge`, consumed by `<ldf-chant-notation>`. -->
+  <script src="/offline/chant/exsurge.min.js" defer></script>
 </body>
 
 <!-- Google tag (gtag.js) -->
