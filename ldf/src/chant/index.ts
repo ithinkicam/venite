@@ -10,3 +10,4 @@ export * from './psalm-tone-assignment';
 export * from './format-tone-id';
 export * from './generate-gabc';
 export * from './point-psalm';
+export * from './stress-lookup';
