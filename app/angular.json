@@ -60,6 +60,11 @@
                 "input": "node_modules/exsurge/dist/",
                 "output": "/offline/chant/"
               },
+              {
+                "glob": "Tone.js",
+                "input": "node_modules/tone/build/",
+                "output": "/offline/chant/"
+              },
               "src/manifest.webmanifest",
               "src/manifest.webmanifest"
             ],

@@ -1,0 +1,20 @@
+// `<ldf-chant-player>` — single play/stop control rendered above the
+// psalm verses when chant playback is enabled. Hosts an Ionic button
+// pair; the actual SVG / notation rendering lives in
+// `<ldf-chant-notation>` per verse.
+
+:host {
+  display: block;
+  margin-bottom: 1em;
+}
+
+:host ion-button {
+  font-size: 0.9em;
+}
+
+// While playing, lightly tint the host so the user has a clear visual
+// signal that something is happening (audio is the primary signal but
+// it can be muted by the OS).
+:host(.playing) ion-button {
+  background: var(--ion-color-primary);
+}
