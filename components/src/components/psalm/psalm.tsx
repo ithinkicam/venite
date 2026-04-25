@@ -490,9 +490,29 @@ export class PsalmComponent {
 
     const localeStrings = this.localeStrings || {};
 
+    // When chant playback is enabled (`chantNotation === 'always'`) AND
+    // both Tone I + the pointing table are loaded, render a single
+    // `<ldf-chant-player>` above the verses. Audio synthesis lives in a
+    // dedicated component so the per-verse `<ldf-chant-notation>`
+    // overlay stays visual-only.
+    const showChantPlayer =
+      this.displaySettings?.chantNotation === 'always' &&
+      Boolean(this.toneOne) &&
+      Boolean(this.pointingTable);
+
     return (
       <Host lang={this.obj?.language || 'en'}>
         <div class={`psalm-parent ${this.editable ? 'editable' : ''} ${this.obj?.display_format || 'default'} ${noNumbers ? 'no-numbers' : ''}`}>
+        {/* Per-psalm audio playback (rendered ONCE, above the verses).
+            See showChantPlayer above for the gating logic. */}
+        {showChantPlayer && (
+          <ldf-chant-player
+            doc={JSON.stringify(this.obj)}
+            tone={JSON.stringify(this.toneOne.variant)}
+            differentia={JSON.stringify(this.toneOne.differentia)}
+            pointingTable={JSON.stringify(this.pointingTable)}
+          ></ldf-chant-player>
+        )}
         {/* Slot for controls*/}
         { (this.editable || this.obj?.style === 'canticle') && <ldf-label-bar>
           <slot slot='end' name='controls'>
