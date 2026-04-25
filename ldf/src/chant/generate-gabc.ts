@@ -43,6 +43,81 @@ export interface GenerateGabcInput {
  * into the same `()` block which GABC already interprets as a compound neume).
  */
 export function generateGabc(input: GenerateGabcInput): string {
+  const { firstAssigned, secondAssigned } = assignBothHalves(input);
+
+  // --- 4. Emit GABC. ---
+  return emitGabc(firstAssigned, secondAssigned);
+}
+
+// ---------------------------------------------------------------------------
+// Pitch-sequence sibling (audio-friendly view of the same assignment)
+// ---------------------------------------------------------------------------
+
+/**
+ * One syllable's worth of pitched output for an audio playback path. The
+ * `<ldf-chant-player>` Tone.js component consumes a stream of these to drive
+ * note scheduling.
+ *
+ * - `text`: the displayed syllable text (with attached punctuation).
+ * - `pitches`: the pitches assigned to this syllable. Reciting-tone syllables
+ *   carry exactly one pitch; cadence syllables may carry several (compound
+ *   neume groups). Empty for caesura entries.
+ * - `isFlex`: marks the syllable that the GABC emitter would precede with a
+ *   flex break `(;)`. Audio renderers may choose to insert a brief pause.
+ * - `isCaesura`: a synthetic boundary entry inserted between the two halves
+ *   (mirrors GABC's `*(:)`). `text === '*'`, `pitches === []`.
+ */
+export interface PitchedSyllable {
+  text: string;
+  pitches: Pitch[];
+  isFlex: boolean;
+  isCaesura: boolean;
+}
+
+/**
+ * Companion to `generateGabc` that returns the per-syllable pitch sequence
+ * directly (in the same order the GABC emitter would walk). Shares the
+ * underlying `assignHalf` pipeline so the visible notation and the audible
+ * playback stay aligned.
+ *
+ * Emits one `PitchedSyllable` per syllable in the first half, then a single
+ * caesura entry `{ text: '*', pitches: [], isFlex: false, isCaesura: true }`,
+ * then one per syllable in the second half. No trailing entry.
+ *
+ * Out of scope here (matches `generateGabc`): no clef metadata, no bar lines,
+ * no termination tail beyond what the differentia's cadence specifies.
+ */
+export function generatePitchSequence(input: GenerateGabcInput): PitchedSyllable[] {
+  const { firstAssigned, secondAssigned } = assignBothHalves(input);
+  const result: PitchedSyllable[] = [];
+  pushHalf(result, firstAssigned);
+  result.push({ text: '*', pitches: [], isFlex: false, isCaesura: true });
+  pushHalf(result, secondAssigned);
+  return result;
+}
+
+function pushHalf(out: PitchedSyllable[], words: AssignedWord[]): void {
+  for (const word of words) {
+    for (const syl of word.syllables) {
+      out.push({
+        text: syl.text,
+        pitches: syl.pitches.slice(),
+        isFlex: Boolean(syl.flexBefore),
+        isCaesura: false,
+      });
+    }
+  }
+}
+
+/**
+ * Shared assignment step. Splits the input text into halves, syllabifies each,
+ * and runs `assignHalf` twice (mediation + termination). Returns both
+ * `AssignedWord[]` lists for downstream emitters (GABC string vs. pitch
+ * sequence) to walk.
+ */
+function assignBothHalves(
+  input: GenerateGabcInput,
+): { firstAssigned: AssignedWord[]; secondAssigned: AssignedWord[] } {
   const { tone, differentia, pointedVerse, text } = input;
 
   // --- 1. Split halves on explicit `*` caesura if present, else halve words. ---
@@ -73,8 +148,7 @@ export function generateGabc(input: GenerateGabcInput): string {
     accentStressSyllable: pointedVerse.finalStressSyllable,
   });
 
-  // --- 4. Emit GABC. ---
-  return emitGabc(firstAssigned, secondAssigned);
+  return { firstAssigned, secondAssigned };
 }
 
 // ---------------------------------------------------------------------------
@@ -266,6 +340,10 @@ interface AssignedSyllable {
   text: string;
   /** GABC letters for this syllable's notes, or null for no notes. */
   gabc: string;
+  /** The actual pitches for this syllable. Carried alongside `gabc` so the
+   *  pitch-sequence emitter (audio playback) can walk the same assignment
+   *  result without re-parsing GABC letters back to scientific pitch. */
+  pitches: Pitch[];
   /** Inserted flex marker before this syllable (e.g. '(;)'), if any. */
   flexBefore?: boolean;
 }
@@ -430,6 +508,7 @@ function assignHalf(words: SyllabifiedWord[], opts: AssignHalfOptions): Assigned
     result[fs.wordIdx].syllables.push({
       text: fs.text,
       gabc: gabcLetters,
+      pitches: fs.pitches.slice(),
       flexBefore: flexSyllableIdx === i ? true : undefined,
     });
   });

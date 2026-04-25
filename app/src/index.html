@@ -50,6 +50,12 @@
        browser cannot resolve the specifier at runtime. Attaches to
        `window.exsurge`, consumed by `<ldf-chant-notation>`. -->
   <script src="/offline/chant/exsurge.min.js" defer></script>
+  <!-- Tone.js (v14, UMD) for `<ldf-chant-player>` audio synthesis.
+       Same rationale as Exsurge above: bare `import('tone')` cannot
+       resolve at Stencil build time. The UMD bundle exposes
+       `window.Tone`. Loaded `defer` so we don't block initial paint;
+       the chant-player polls for the global on first user click. -->
+  <script src="/offline/chant/Tone.js" defer></script>
 </body>
 
 <!-- Google tag (gtag.js) -->

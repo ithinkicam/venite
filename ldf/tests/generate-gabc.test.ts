@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import {
   generateGabc,
+  generatePitchSequence,
   pitchToGabcLetter,
   ToneFile,
   ToneVariant,
@@ -211,6 +212,54 @@ describe('generateGabc — cadence aligns to stressed syllable', () => {
 // ---------------------------------------------------------------------------
 // Test 5: Fallback behavior when cadence has no `accent`-role group
 // ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// generatePitchSequence smoke
+// ---------------------------------------------------------------------------
+
+describe('generatePitchSequence — Tone I A / Ps 23 v1', () => {
+  it('returns a syllable stream with one caesura entry and pitched syllables', () => {
+    const tone1 = loadTone('tone-1');
+    const variant = findVariant(tone1, 'tone-1-a');
+    const differentia = findDifferentia(variant, '4');
+
+    const pointedVerse: VersePointing = {
+      mediantAccent: 0,
+      finalAccent: 0,
+      mediantStressSyllable: 0,
+      finalStressSyllable: 0,
+      intonationWords: 2,
+    };
+
+    const seq = generatePitchSequence({
+      tone: variant,
+      differentia,
+      pointedVerse,
+      text: 'The Lord is my shepherd; * I shall not be in want.',
+    });
+
+    // Sanity: non-empty.
+    expect(seq.length).toBeGreaterThan(0);
+
+    // Exactly one caesura entry, with empty pitches and text === '*'.
+    const caesuras = seq.filter((s) => s.isCaesura);
+    expect(caesuras.length).toBe(1);
+    expect(caesuras[0].pitches).toEqual([]);
+    expect(caesuras[0].text).toBe('*');
+
+    // Total pitches across all syllables > 0.
+    const totalPitches = seq.reduce((acc, s) => acc + s.pitches.length, 0);
+    expect(totalPitches).toBeGreaterThan(0);
+
+    // Every non-caesura syllable should carry at least one pitch (reciting
+    // tone is the floor) and a non-empty `text`.
+    for (const s of seq) {
+      if (s.isCaesura) continue;
+      expect(s.text.length).toBeGreaterThan(0);
+      expect(s.pitches.length).toBeGreaterThan(0);
+    }
+  });
+});
 
 describe('generateGabc — fallback when no accent role in cadence', () => {
   it('uses legacy "last N syllables" alignment when cadence is accent-less', () => {
