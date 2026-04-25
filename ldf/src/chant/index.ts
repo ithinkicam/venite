@@ -7,6 +7,7 @@ export * from './tone-file';
 export * from './chant-data';
 export * from './pointing';
 export * from './psalm-tone-assignment';
+export * from './resolve-psalm-tone';
 export * from './format-tone-id';
 export * from './generate-gabc';
 export * from './point-psalm';

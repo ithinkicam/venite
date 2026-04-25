@@ -10,11 +10,14 @@
  *   commonprayer/src/chant/tones/*.json           — one file per tone
  *   commonprayer/src/chant/pointing/*.json        — one file per pointing fixture
  *                                                   (created in Wave 2; optional here)
+ *   commonprayer/src/chant/psalm-tone-assignments.json — per-psalm tone assignment
+ *                                                   table (Phase 2 W4; optional here)
  *
  * Write (runtime-fetched offline assets):
  *   app/src/offline/chant/tones.json              — { tones: ToneFile[] } ordered
  *                                                   tone-1 … tone-8, tone-peregrinus
  *   app/src/offline/chant/pointing/<basename>.json — one file per pointing fixture
+ *   app/src/offline/chant/psalm-tone-assignments.json — copy of the assignment table
  *
  * Each tone JSON must match the `ToneFile` interface (see ldf/src/chant/tone-file.ts):
  *   { id: string, mode: number | 'peregrinus', name: string, variants: ToneVariant[] }
@@ -158,7 +161,9 @@ async function writeJson(outFile, body) {
  *   toneCount: number,
  *   tonesBytes: number,
  *   pointingFiles: string[],
- *   pointingBytes: number
+ *   pointingBytes: number,
+ *   assignmentsFile: string | null,
+ *   assignmentsBytes: number,
  * }>}
  */
 export async function syncChantOffline(opts = {}) {
@@ -168,6 +173,13 @@ export async function syncChantOffline(opts = {}) {
 
   const tonesSrcDir = path.join(repoRoot, 'commonprayer', 'src', 'chant', 'tones');
   const pointingSrcDir = path.join(repoRoot, 'commonprayer', 'src', 'chant', 'pointing');
+  const assignmentsSrcFile = path.join(
+    repoRoot,
+    'commonprayer',
+    'src',
+    'chant',
+    'psalm-tone-assignments.json'
+  );
 
   // --- Tones (required) ------------------------------------------------------
   const toneEntries = await readJsonDir(tonesSrcDir);
@@ -230,12 +242,47 @@ export async function syncChantOffline(opts = {}) {
     );
   }
 
+  // --- Psalm-tone assignments (optional — added in Phase 2 W4) --------------
+  // Single-file copy. Fail-soft: if the source file isn't present we skip the
+  // copy and emit a log line, mirroring the pointing-fixture behavior. The
+  // runtime resolver in `<ldf-psalm>` falls back to its `default` entry when
+  // the served JSON is missing or empty.
+  let assignmentsFile = null;
+  let assignmentsBytes = 0;
+  try {
+    const raw = await fs.readFile(assignmentsSrcFile, 'utf8');
+    let parsed;
+    try {
+      parsed = JSON.parse(raw);
+    } catch (err) {
+      throw new Error(
+        `[sync-chant-offline] ${assignmentsSrcFile}: invalid JSON — ${err.message}`
+      );
+    }
+    assignmentsFile = path.join(outDir, 'psalm-tone-assignments.json');
+    assignmentsBytes = await writeJson(assignmentsFile, parsed);
+    log(
+      `[sync-chant-offline] wrote psalm-tone assignments → ${path.relative(
+        repoRoot,
+        assignmentsFile
+      )} (${assignmentsBytes} bytes)`
+    );
+  } catch (err) {
+    if (err && err.code === 'ENOENT') {
+      log('[sync-chant-offline] no psalm-tone assignments file; skipping');
+    } else {
+      throw err;
+    }
+  }
+
   return {
     tonesFile,
     toneCount: tones.length,
     tonesBytes,
     pointingFiles,
     pointingBytes,
+    assignmentsFile,
+    assignmentsBytes,
   };
 }
 
