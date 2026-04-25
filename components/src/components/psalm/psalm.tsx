@@ -1,6 +1,6 @@
 import { modalController } from '@ionic/core';
 import { Component, Element, Prop, Event, Watch, State, JSX, h, Host, EventEmitter } from '@stencil/core';
-import { Psalm, PsalmSection, PsalmVerse, Refrain, Heading, dateFromYMDString, LiturgicalDocument, Change, DisplaySettings, VersePointing } from '@venite/ldf';
+import { Psalm, PsalmSection, PsalmVerse, Refrain, Heading, dateFromYMDString, LiturgicalDocument, Change, DisplaySettings, VersePointing, resolvePsalmTone, PsalmToneAssignmentTable, ToneFile, ResolvedTone } from '@venite/ldf';
 import { getComponentClosestLanguage } from '../../utils/locale';
 
 import EN from './psalm.i18n.en.json';
@@ -81,48 +81,57 @@ function __resetPointingTableCacheForTests() {
 void __resetPointingTableCacheForTests;
 
 /**
- * Module-scope cache + loader for the aggregate tones JSON. Phase 2 W1
- * hardcodes the lookup to Tone I A (variant index 0, differentia index 0)
- * because the canticle/preference plumbing for picking a tone per psalm
- * does not exist yet. Loader is fail-open: any fetch / parse failure
- * resolves to `null`, and `<ldf-psalm>` falls through to the existing
- * pointing-only render path.
+ * Module-scope cache + loader for the aggregate tones JSON and the per-psalm
+ * tone-assignment table. Phase 2 W4 replaces the hardcoded Tone I A snapshot
+ * with a per-psalm resolver: `loadToneTable()` fetches both
+ * `/offline/chant/tones.json` and `/offline/chant/psalm-tone-assignments.json`
+ * once per page load, and `<ldf-psalm>` calls `resolvePsalmTone(...)` against
+ * the result to pick the right (variant, differentia) per psalm.
+ *
+ * Loader is fail-open on all fronts: a missing/invalid tones JSON resolves to
+ * `{ tones: [], table: null }` and the notation render path silently skips;
+ * a missing assignment table resolves the `tones` half but leaves `table` as
+ * `null`, which causes `resolvePsalmTone` to fall through to its built-in
+ * default (first available tone/variant/differentia).
  */
-type ToneSnapshot = { variant: any; differentia: any } | null;
-let toneOnePromise: Promise<ToneSnapshot> | null = null;
+type ToneTableSnapshot = { tones: ToneFile[]; table: PsalmToneAssignmentTable | null };
+let toneTablePromise: Promise<ToneTableSnapshot> | null = null;
 
-function loadToneOne(): Promise<ToneSnapshot> {
-  if (toneOnePromise) return toneOnePromise;
-  toneOnePromise = fetch('/offline/chant/tones.json')
+function loadToneTable(): Promise<ToneTableSnapshot> {
+  if (toneTablePromise) return toneTablePromise;
+  const tonesP = fetch('/offline/chant/tones.json')
     .then((r) => (r.ok ? r.json() : null))
     .then((data) => {
-      const tonesField = data?.tones || data;
+      const tonesField = (data && (data.tones || data)) || null;
       // tones may be an array or an object keyed by id.
       const list = Array.isArray(tonesField)
         ? tonesField
         : tonesField
         ? Object.values(tonesField)
         : [];
-      const tone1: any = list.find(
-        (t: any) =>
-          t?.id === 'tone-1' || t?.id === '1' || t?.toneId === 'tone-1',
-      );
-      if (!tone1) return null;
-      const variant = tone1.variants?.[0];
-      // Differentiae live inside the variant in the canonical `ToneFile`
-      // shape; the legacy top-level keys are accepted as a fallback.
-      const differentia =
-        variant?.differentiae?.[0] ||
-        tone1.differentiae?.[0] ||
-        tone1.differentia?.[0];
-      if (!variant || !differentia) return null;
-      return { variant, differentia };
+      return list as ToneFile[];
     })
     .catch((err) => {
-      console.warn('[ldf-psalm] Could not load Tone 1:', err);
-      return null;
+      console.warn('[ldf-psalm] Could not load tones:', err);
+      return [] as ToneFile[];
     });
-  return toneOnePromise;
+  const tableP = fetch('/offline/chant/psalm-tone-assignments.json')
+    .then((r) => (r.ok ? r.json() : null))
+    .then((data) => {
+      if (!data || typeof data !== 'object') return null;
+      // Accept the canonical shape only; resolver tolerates `null`.
+      if (!data.assignments && !data.default) return null;
+      return data as PsalmToneAssignmentTable;
+    })
+    .catch((err) => {
+      console.warn('[ldf-psalm] Could not load psalm-tone assignments:', err);
+      return null as PsalmToneAssignmentTable | null;
+    });
+  toneTablePromise = Promise.all([tonesP, tableP]).then(([tones, table]) => ({
+    tones,
+    table,
+  }));
+  return toneTablePromise;
 }
 
 @Component({
@@ -143,11 +152,15 @@ export class PsalmComponent {
    *  `loadPointingTable()` in `componentWillLoad`. Empty object when the
    *  fetch fails (fail-open, renders plain text). */
   @State() pointingTable?: PointingTable;
-  /** Tone I A snapshot (`{ variant, differentia }`) loaded from
-   *  `/offline/chant/tones.json`. Populated by `loadToneOne()` in
-   *  `componentWillLoad`. `null` when the fetch fails or the tone is
-   *  missing — Phase 2 W1 silently skips notation rendering in that case. */
-  @State() toneOne?: ToneSnapshot;
+  /** Aggregate tones + per-psalm assignment table loaded from
+   *  `/offline/chant/tones.json` and `/offline/chant/psalm-tone-assignments.json`.
+   *  Populated by `loadToneTable()` in `componentWillLoad`. `tones` is `[]`
+   *  and `table` is `null` when fetches fail — the notation/player render
+   *  path silently skips in that case (resolver returns `null`). */
+  @State() toneTable?: ToneTableSnapshot;
+  /** Resolved tone for THIS psalm. Computed once per `obj` change so the
+   *  per-psalm lookup runs at most once per render-cycle, not per verse. */
+  @State() resolvedTone?: ResolvedTone | null;
 
   // Properties
   /** The LDF Psalm to be rendered, either as JSON or an Object */
@@ -195,9 +208,17 @@ export class PsalmComponent {
     // psalter-version preference through.
     const table = await loadPointingTable();
     this.pointingTable = table;
-    // Load Tone I A. Fails open → `toneOne` stays undefined and the
-    // notation render path silently skips.
-    this.toneOne = await loadToneOne();
+    // Load the tones + per-psalm assignment table, then resolve the tone for
+    // THIS psalm. Fails open → `toneTable` ends up with `tones: []` /
+    // `table: null` and `resolvedTone` becomes `null`, so the notation /
+    // player render path silently skips.
+    const toneTable = await loadToneTable();
+    this.toneTable = toneTable;
+    this.resolvedTone = resolvePsalmTone(
+      this.obj?.metadata?.number,
+      toneTable.tones,
+      toneTable.table,
+    );
   }
 
   // Private methods
@@ -276,19 +297,19 @@ export class PsalmComponent {
   ) : JSX.Element {
     const pointing = this.pointingFor(verse?.number);
     if (pointing) {
-      // When chantNotation === 'always' AND a Tone I snapshot is loaded,
-      // render `<ldf-chant-notation>` ABOVE the existing chant-pointing
-      // overlay. Other `chantNotation` values ('off', 'collapsed',
-      // 'tablet-only') leave the overlay-only path unchanged.
+      // When chantNotation === 'always' AND a tone has been resolved for
+      // this psalm, render `<ldf-chant-notation>` ABOVE the existing
+      // chant-pointing overlay. Other `chantNotation` values ('off',
+      // 'collapsed', 'tablet-only') leave the overlay-only path unchanged.
       const showNotation =
-        this.displaySettings?.chantNotation === 'always' && Boolean(this.toneOne);
+        this.displaySettings?.chantNotation === 'always' && Boolean(this.resolvedTone);
       return (
         <div class="verse-with-chant">
           {showNotation && (
             <ldf-chant-notation
               text={text}
-              tone={JSON.stringify(this.toneOne.variant)}
-              differentia={JSON.stringify(this.toneOne.differentia)}
+              tone={JSON.stringify(this.resolvedTone.variant)}
+              differentia={JSON.stringify(this.resolvedTone.differentia)}
               pointing={JSON.stringify(pointing)}
             ></ldf-chant-notation>
           )}
@@ -490,14 +511,14 @@ export class PsalmComponent {
 
     const localeStrings = this.localeStrings || {};
 
-    // When chant playback is enabled (`chantNotation === 'always'`) AND
-    // both Tone I + the pointing table are loaded, render a single
-    // `<ldf-chant-player>` above the verses. Audio synthesis lives in a
-    // dedicated component so the per-verse `<ldf-chant-notation>`
-    // overlay stays visual-only.
+    // When chant playback is enabled (`chantNotation === 'always'`) AND a
+    // tone has been resolved for this psalm AND the pointing table is
+    // loaded, render a single `<ldf-chant-player>` above the verses. Audio
+    // synthesis lives in a dedicated component so the per-verse
+    // `<ldf-chant-notation>` overlay stays visual-only.
     const showChantPlayer =
       this.displaySettings?.chantNotation === 'always' &&
-      Boolean(this.toneOne) &&
+      Boolean(this.resolvedTone) &&
       Boolean(this.pointingTable);
 
     return (
@@ -508,8 +529,8 @@ export class PsalmComponent {
         {showChantPlayer && (
           <ldf-chant-player
             doc={JSON.stringify(this.obj)}
-            tone={JSON.stringify(this.toneOne.variant)}
-            differentia={JSON.stringify(this.toneOne.differentia)}
+            tone={JSON.stringify(this.resolvedTone.variant)}
+            differentia={JSON.stringify(this.resolvedTone.differentia)}
             pointingTable={JSON.stringify(this.pointingTable)}
           ></ldf-chant-player>
         )}
