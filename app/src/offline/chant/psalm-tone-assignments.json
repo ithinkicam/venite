@@ -1,0 +1,29 @@
+{
+  "_meta": {
+    "status": "MVP table",
+    "notes": "Hardcoded Anglican/Sarum-flavored defaults for the 20-psalm fixture set. Ps 95 takes Tone 5 (traditional invitatory); Ps 114/115 take Peregrinus (the 'wandering tone'). Everything else defaults to Tone 1. Tone IDs match the actual `id` field inside each tone JSON (e.g. `tone-peregrinus`, not `tone-p`). Refine when more tones land or when PsalmToneAssignment.source preference cascade is wired (Phase 4).",
+    "generated": "2026-04-25"
+  },
+  "assignments": {
+    "95": {
+      "toneId": "tone-5",
+      "variantIndex": 0,
+      "differentiaIndex": 0
+    },
+    "114": {
+      "toneId": "tone-peregrinus",
+      "variantIndex": 0,
+      "differentiaIndex": 0
+    },
+    "115": {
+      "toneId": "tone-peregrinus",
+      "variantIndex": 0,
+      "differentiaIndex": 0
+    }
+  },
+  "default": {
+    "toneId": "tone-1",
+    "variantIndex": 0,
+    "differentiaIndex": 0
+  }
+}
